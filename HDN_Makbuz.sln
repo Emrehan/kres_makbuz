@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDN_Makbuz", "HDN_Makbuz\HDN_Makbuz.csproj", "{92A8957D-FF69-49DE-8E4D-9295247F1ADF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92A8957D-FF69-49DE-8E4D-9295247F1ADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92A8957D-FF69-49DE-8E4D-9295247F1ADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92A8957D-FF69-49DE-8E4D-9295247F1ADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92A8957D-FF69-49DE-8E4D-9295247F1ADF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5DE6ADE-0462-49F0-BB2A-6496D1CC338A}
+	EndGlobalSection
+EndGlobal
