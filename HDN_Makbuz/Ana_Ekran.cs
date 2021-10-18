@@ -33,9 +33,6 @@ namespace HDN_Makbuz
 
             printDocument1.PrintPage += PrintDocument1_PrintPage;
 
-            kasım ayı 
-                klv yazma
-
             label_versiyon.Text = "0.0.5";
 
             cocuk_Listesi.Ekran_Kapandi += Cocuk_Listesi_Ekran_Kapandi;

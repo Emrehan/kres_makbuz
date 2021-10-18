@@ -13,5 +13,6 @@ namespace Neslihan_Kres_Makbuz
     /// </summary>
     public partial class App : Application
     {
+        
     }
 }
