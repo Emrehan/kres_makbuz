@@ -12,6 +12,10 @@ namespace Neslihan_Kres_Makbuz.ViewModel
     {
         private ObservableCollection<Student> _students;
         private Student _selectedStudent;
+
+        private ObservableCollection<Receipt> _receipts;
+        private Receipt _selectedReceipt;
+
         private string _version;
         private Globals _global;
 
@@ -19,7 +23,8 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         {
             Global = Globals.Instance;
 
-            Students = new ObservableCollection<Student>();            
+            Students = new ObservableCollection<Student>();
+            Receipts = new ObservableCollection<Receipt>();            
             for(int i = 0; i< 50; i++)
             {
                 Students.Add(new Student()
@@ -34,6 +39,19 @@ namespace Neslihan_Kres_Makbuz.ViewModel
                     Status = i % 10 != 0 ? STATUS.MEMBER : STATUS.LEFT,
                     TC = "11111"+i                    
                 });
+
+                if (i % 5 == 0)
+                {
+                    Receipts.Add(new Receipt() 
+                    { 
+                        ID = (i/5) + 1,
+                        CreateDate = System.DateTime.Now,
+                        KDV = 18.0,
+                        Serial = "qfe"+i,
+                        student = Students[i],
+                        WaybillNo = "www"+i
+                    });
+                }
             }
 
             LoadEmployeesCommand = new RelayCommand(LoadEmployeesMethod);
@@ -66,6 +84,30 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             set
             {
                 Set<ObservableCollection<Student>>(() => this.Students, ref _students, value);
+            }
+        }
+
+        public Receipt SelectedReceipt
+        {
+            get
+            {
+                return _selectedReceipt;
+            }
+            set
+            {
+                Set<Receipt>(() => this.SelectedReceipt, ref _selectedReceipt, value);
+            }
+        }
+
+        public ObservableCollection<Receipt> Receipts
+        {
+            get
+            {
+                return _receipts;
+            }
+            set
+            {
+                Set<ObservableCollection<Receipt>>(() => this.Receipts, ref _receipts, value);
             }
         }
 

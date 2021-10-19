@@ -51,6 +51,11 @@ namespace Neslihan_Kres_Makbuz.Model
             Messenger.Default.Register<KDVChangedMessage>(this, (KDVChangedMessage) => CalculateFee() );
         }
 
+        public override string ToString()
+        {
+            return Name + " " + tc;
+        }
+
         #region PROPERTIES
         public int ID
         { 

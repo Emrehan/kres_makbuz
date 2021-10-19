@@ -72,7 +72,7 @@
     </ApplicationDefinition>
     <Compile Include="Config\Globals.cs" />
     <Compile Include="Message\KDVChangedMessage.cs" />
-    <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Receipt.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
