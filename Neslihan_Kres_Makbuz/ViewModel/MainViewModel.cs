@@ -51,6 +51,8 @@ namespace Neslihan_Kres_Makbuz.ViewModel
                         student = Students[i],
                         WaybillNo = "www"+i
                     });
+
+                    Students[i].Receipts.Add(Receipts[i / 5]);
                 }
             }
 

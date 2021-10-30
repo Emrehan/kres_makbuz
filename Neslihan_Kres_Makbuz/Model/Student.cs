@@ -4,6 +4,7 @@ using Neslihan_Kres_Makbuz.Config;
 using Neslihan_Kres_Makbuz.Message;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,8 +47,12 @@ namespace Neslihan_Kres_Makbuz.Model
         private string program_desc; //How many days student attemp
         private string address;
 
+        private ObservableCollection<Receipt> receipts;
+
         public Student()
         {
+            receipts = new ObservableCollection<Receipt>();
+
             Messenger.Default.Register<KDVChangedMessage>(this, (KDVChangedMessage) => CalculateFee() );
         }
 
@@ -64,6 +69,15 @@ namespace Neslihan_Kres_Makbuz.Model
             {
                 Set<int>(() => this.ID, ref id, value);
             } 
+        }
+
+        public ObservableCollection<Receipt> Receipts
+        {
+            get => receipts;
+            set
+            {
+                Set<ObservableCollection<Receipt>>(() => this.Receipts, ref receipts, value);
+            }
         }
 
         public string Name

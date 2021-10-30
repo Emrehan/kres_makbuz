@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Neslihan_Kres_Makbuz"
         xmlns:config="clr-namespace:Neslihan_Kres_Makbuz.Config"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1200"               
+        Title="Harikalar Diyarı Neslihan Kreş" Height="450" Width="1200"               
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         >
     <StackPanel Orientation="Vertical">
@@ -22,7 +22,55 @@
                 Height="400"
                 AlternatingRowBackground="Bisque"
                 SelectionMode="Extended"
-                />
+                AutoGenerateColumns="False"
+                >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="İsim" Binding="{Binding Name}" Width="200" ></DataGridTextColumn>
+                    <DataGridTextColumn Header="Ücret" Binding="{Binding Fee}" Width="70"></DataGridTextColumn>
+                    <DataGridTextColumn Header="KDV Hariç" IsReadOnly="True" Binding="{Binding Fee_wo_kdv}" Width="70"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Kesilen KDV" IsReadOnly="True" Binding="{Binding Cuted_kdv}" Width="40"></DataGridTextColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="0" Background="BlanchedAlmond" Padding="10">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <TextBlock FontWeight="Bold" Text="TC: " VerticalAlignment="Center" />
+                                        <TextBox Foreground="MidnightBlue" Text="{Binding TC, Mode=TwoWay}" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <TextBlock FontWeight="Bold" Text="Sınıf: " VerticalAlignment="Center" />
+                                        <TextBlock Foreground="MidnightBlue" Text="{Binding SClass}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="10">
+                                        <TextBlock FontWeight="Bold" Text="Durum: " VerticalAlignment="Center" />
+                                        <TextBlock Foreground="MidnightBlue" Text="{Binding Status}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <TextBlock FontWeight="Bold" Text="Adres: " VerticalAlignment="Center" />
+                                    <TextBox Foreground="MidnightBlue" Text="{Binding Address, Mode=TwoWay}" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" />
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <TextBlock FontWeight="Bold" Text="Program: " VerticalAlignment="Center" />
+                                    <TextBox Foreground="MidnightBlue" Text="{Binding Program_desc, Mode=TwoWay}" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" />
+                                </StackPanel>
+
+                                <DataGrid 
+                                    ItemsSource ="{Binding Receipts}" 
+                                    IsReadOnly="True"
+                                    Height="75"                                    
+                                    AlternatingRowBackground="Bisque"                                                                        
+                                    />
+
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
             <DataGrid 
                 ItemsSource ="{Binding Receipts}" 
                 SelectedItem="{Binding SelectedReceipt}" 
