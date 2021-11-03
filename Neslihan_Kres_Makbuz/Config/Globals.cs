@@ -11,6 +11,8 @@ namespace Neslihan_Kres_Makbuz.Config
 {
     public class Globals : ObservableObject
     {
+        private string version;
+
         private double kdv;
         
         private static Globals _instance;
@@ -19,6 +21,7 @@ namespace Neslihan_Kres_Makbuz.Config
         private Globals()
         {
             kdv = 18.0;
+            version = "2.0.0";
         }
 
         public static Globals Instance
@@ -45,6 +48,15 @@ namespace Neslihan_Kres_Makbuz.Config
                 Set<double>(() => this.KDV, ref kdv, value);
 
                 Messenger.Default.Send(new KDVChangedMessage(value));
+            }
+        }
+
+        public string VERSION
+        {
+            get => version;
+            set
+            {
+                Set<string>(() => this.VERSION, ref version, value);
             }
         }
     }
