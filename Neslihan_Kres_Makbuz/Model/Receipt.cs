@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Bogus;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Neslihan_Kres_Makbuz.Model
 {
     public class Receipt : ObservableObject
     {
+        private static int receiptIDCount = 0;
+
         private int id;
         private string serial;
         private DateTime createDate;
@@ -17,6 +20,14 @@ namespace Neslihan_Kres_Makbuz.Model
         private double kdv;
 
         #region PROPERTIES
+        public static Faker<Receipt> FakeData { get; } =
+            new Faker<Receipt>(locale: "tr")
+                .RuleFor(p => p.ID, f => receiptIDCount++)
+                .RuleFor(p => p.Serial, f => f.Lorem.Sentence(3))
+                .RuleFor(p => p.CreateDate, f => f.Date.Future())
+                .RuleFor(p => p.WaybillNo, f => f.Lorem.Sentence(3));
+
+
         public int ID
         {
             get => id;

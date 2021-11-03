@@ -5,6 +5,7 @@ using Neslihan_Kres_Makbuz.Config;
 using Neslihan_Kres_Makbuz.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
 {
@@ -23,47 +24,23 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         {
             Global = Globals.Instance;
 
-            Students = new ObservableCollection<Student>();
-            Receipts = new ObservableCollection<Receipt>();            
-            for(int i = 0; i< 50; i++)
+            Students = new ObservableCollection<Student>( Student.FakeData.Generate(50).ToArray() );
+            Receipts = new ObservableCollection<Receipt>( Receipt.FakeData.Generate(6000).ToArray() );
+
+            Random rn = new Random();
+            foreach (var r in Receipts)
             {
-                Students.Add(new Student()
-                {
-                    ID = i + 1,
-                    Name = "name" + i,
-                    Address = "adress " + i,
-                    Fee = 1000 + 100 * i,
-                    Program_desc = "desc " + i,
-                    SClass = i % 2 == 0 ? CLASSES.FIVE_MORE : CLASSES.FOUR,
-                    Sex = i % 2 == 0 ? SEX.BOY : SEX.GIRL,
-                    Status = i % 10 != 0 ? STATUS.MEMBER : STATUS.LEFT,
-                    TC = "11111"+i                    
-                });
-
-                if (i % 5 == 0)
-                {
-                    Receipts.Add(new Receipt() 
-                    { 
-                        ID = (i/5) + 1,
-                        CreateDate = System.DateTime.Now,
-                        KDV = 18.0,
-                        Serial = "qfe"+i,
-                        student = Students[i],
-                        WaybillNo = "www"+i
-                    });
-
-                    Students[i].Receipts.Add(Receipts[i / 5]);
-                }
+                var s = Students[rn.Next(Students.Count)];
+                r.student = s;
+                s.Receipts.Add(r);
             }
 
-            LoadEmployeesCommand = new RelayCommand(LoadEmployeesMethod);
-            SaveEmployeesCommand = new RelayCommand(SaveEmployeesMethod);
+            EditStudentCommand = new RelayCommand(EditStudentMethod);
 
             Version = "1.0";
         }
 
-        public ICommand LoadEmployeesCommand { get; private set; }
-        public ICommand SaveEmployeesCommand { get; private set; }
+        public ICommand EditStudentCommand { get; private set; }
 
         public string Version
         {
@@ -137,14 +114,9 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             }
         }
 
-        public void SaveEmployeesMethod()
+        private void EditStudentMethod()
         {
             Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Employees Saved."));
-        }
-
-        private void LoadEmployeesMethod()
-        {
-
         }
     }
 }

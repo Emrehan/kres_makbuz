@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Bogus;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using Neslihan_Kres_Makbuz.Config;
 using Neslihan_Kres_Makbuz.Message;
@@ -34,6 +35,8 @@ namespace Neslihan_Kres_Makbuz.Model
 
     public class Student : ObservableObject
     {
+        private static int studentIDCount = 0;
+
         private int id;
         private string name;
         private string tc;
@@ -46,6 +49,8 @@ namespace Neslihan_Kres_Makbuz.Model
         private double cuted_kdv;
         private string program_desc; //How many days student attemp
         private string address;
+
+        private bool chosen;
 
         private ObservableCollection<Receipt> receipts;
 
@@ -62,6 +67,19 @@ namespace Neslihan_Kres_Makbuz.Model
         }
 
         #region PROPERTIES
+        public static Faker<Student> FakeData { get; } =
+            new Faker<Student>(locale: "tr")
+                .RuleFor(p => p.ID, f => studentIDCount++)
+                .RuleFor(p => p.Name, f => f.Name.FullName())
+                .RuleFor(p => p.TC, f => f.Random.Long(10000000000, 99999999999).ToString())
+                .RuleFor(p => p.SClass, f => f.PickRandom<CLASSES>())
+                .RuleFor(p => p.Sex, f => f.PickRandom<SEX>())
+                .RuleFor(p => p.Status, f => f.PickRandom<STATUS>())
+                .RuleFor(p => p.Fee, (f, p) => f.Random.Float(500, 2000))
+                .RuleFor(p => p.Program_desc, f => f.Lorem.Sentence(3))
+                .RuleFor(p => p.Address, f => f.Address.FullAddress())
+                .RuleFor(p => p.Chosen, f => f.Random.Bool());
+
         public int ID
         { 
             get => id; 
@@ -169,6 +187,15 @@ namespace Neslihan_Kres_Makbuz.Model
             set
             {
                 Set<string>(() => this.Address, ref address, value);
+            }
+        }
+
+        public bool Chosen
+        {
+            get => chosen;
+            set
+            {
+                Set<bool>(() => this.Chosen, ref chosen, value);
             }
         }
 
