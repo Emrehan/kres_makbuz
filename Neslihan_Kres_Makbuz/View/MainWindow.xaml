@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Neslihan_Kres_Makbuz"
         xmlns:config="clr-namespace:Neslihan_Kres_Makbuz.Config"
-        xmlns:Converter="clr-namespace:Neslihan_Kres_Makbuz.Converter" x:Class="Neslihan_Kres_Makbuz.MainWindow"
+        xmlns:Converter="clr-namespace:Neslihan_Kres_Makbuz.Converter" x:Class="Neslihan_Kres_Makbuz.MainWindow"        
         mc:Ignorable="d"
         Title="Harikalar Diyarı Neslihan Kreş" Height="450" Width="1200"
         >
@@ -62,15 +62,11 @@
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Düzenle" Command="{Binding Main.EditStudentCommand, Mode=OneWay}" DataContext="{Binding Source={StaticResource Locator}}"  />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Aktif/Pasif" />
+                                <Button Command="{Binding Main.EditStudentCommand, Mode=OneWay}" DataContext="{Binding Source={StaticResource Locator}}" Background="Transparent">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Neslihan_Kres_Makbuz;component/Resources/edit.png" Width="20" Height="20"/>
+                                    </StackPanel>
+                                </Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

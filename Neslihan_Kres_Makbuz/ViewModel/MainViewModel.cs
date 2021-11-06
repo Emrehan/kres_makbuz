@@ -6,6 +6,7 @@ using Neslihan_Kres_Makbuz.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System;
+using System.Linq;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
 {
@@ -42,6 +43,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
 
         public ICommand EditStudentCommand { get; private set; }
 
+        #region Properties
         public string Version
         {
             get
@@ -112,11 +114,19 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             {
                 Set<Globals>(() => this.Global, ref _global, value);
             }
-        }
+        } 
+        #endregion
 
         private void EditStudentMethod()
         {
-            Messenger.Default.Send<NotificationMessage>(new NotificationMessage("Employees Saved."));
+            var studentEditWindow = new View.StudentEditWindow(SelectedStudent);
+            if (studentEditWindow.ShowDialog() == true)
+            {
+                var editedStudent = ((StudentEditWindowViewModel)studentEditWindow.DataContext).Student;
+                //Students.Remove(SelectedStudent);
+                //Students.Add(editedStudent);
+                SelectedStudent = editedStudent;
+            }
         }
     }
 }

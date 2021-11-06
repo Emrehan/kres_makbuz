@@ -32,9 +32,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<MainViewModel>();
-            
-            
-            Messenger.Default.Register<NotificationMessage>(this, (NotificationMessage msg) => MessageBox.Show(msg.Notification));
+            SimpleIoc.Default.Register<StudentEditWindowViewModel>();
         }
 
         public MainViewModel Main
@@ -44,6 +42,16 @@ namespace Neslihan_Kres_Makbuz.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
+
+        public StudentEditWindowViewModel StudentEditWindow
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<StudentEditWindowViewModel>();
+            }
+        }
+
+
         
         public static void Cleanup()
         {
