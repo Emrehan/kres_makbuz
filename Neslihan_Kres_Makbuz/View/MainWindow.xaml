@@ -7,7 +7,7 @@
         xmlns:config="clr-namespace:Neslihan_Kres_Makbuz.Config"
         xmlns:Converter="clr-namespace:Neslihan_Kres_Makbuz.Converter" x:Class="Neslihan_Kres_Makbuz.MainWindow"        
         mc:Ignorable="d"
-        Title="Harikalar Diyarı Neslihan Kreş" Height="450" Width="1200"
+        Title="Harikalar Diyarı Neslihan Kreş" Height="920" Width="1280"
         >
     <Window.Resources>
         <Converter:ChosenStudentConverter x:Key="ChosenStudentConverter"/>
@@ -15,111 +15,111 @@
     <Window.DataContext>
         <Binding Path="Main" Source="{StaticResource Locator}"/>
     </Window.DataContext>
-    <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal">
-            <TextBox Text="{Binding Global.VERSION}" />
-            <TextBox Text="{Binding Global.KDV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Text="{Binding SelectedStudent.Name}" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition MinWidth="590" />
+            <ColumnDefinition Width="100" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
 
-            <DataGrid ItemsSource="{Binding Students, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ChosenStudentConverter}}"
-                AutoGenerateColumns="False" Height="82">
-                <DataGrid.Columns>
-                    <DataGridCheckBoxColumn Header="Seçili" Binding="{Binding Chosen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    <DataGridTextColumn Header="İsim" Binding="{Binding Name}" Width="200" />
-                    <DataGridTextColumn Header="Ücret" Binding="{Binding Fee}" Width="70"/>
-                    <DataGridTextColumn Header="KDV Hariç" IsReadOnly="True" Binding="{Binding Fee_wo_kdv}" Width="70"/>
-                    <DataGridTextColumn Header="Kesilen KDV" IsReadOnly="True" Binding="{Binding Cuted_kdv}" Width="40"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-
+        <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Horizontal">
+            <TextBox Height="30" Width="40" Text="{Binding Global.KDV, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+            <TextBox Height="30" Width="40" Text="{Binding Global.VERSION}" Margin="5" />
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <DataGrid 
-                x:Name="StudentDataGrid"
-                x:FieldModifier="public"
-                ItemsSource ="{Binding Students, UpdateSourceTrigger=PropertyChanged}" 
-                SelectedItem="{Binding SelectedStudent}" 
-                Height="400"
-                AlternatingRowBackground="CornflowerBlue"
-                SelectionMode="Extended"
-                AutoGenerateColumns="False"
-                HeadersVisibility="All"
-                KeyboardNavigation.ControlTabNavigation="None"
-                EnableColumnVirtualization="True"
-                EnableRowVirtualization="True"
+
+        <DataGrid 
+            Grid.Row="1"
+            Grid.Column="1"
+            x:Name="StudentDataGrid"
+            x:FieldModifier="public"
+            ItemsSource ="{Binding Students, UpdateSourceTrigger=PropertyChanged}" 
+            SelectedItem="{Binding SelectedStudent}" 
+            Height="400"
+            Width="590"
+            AlternatingRowBackground="#FFDCF4FF"
                 
-                >
-                <DataGrid.Columns>
+            SelectionMode="Extended"
+            AutoGenerateColumns="False"
+            HeadersVisibility="All"
+            KeyboardNavigation.ControlTabNavigation="None"
+            EnableColumnVirtualization="True"
+            EnableRowVirtualization="True" Background="{x:Null}" RowBackground="#FFB1DBFF" 
+            >
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True" >
+                            <Setter Property="Background" Value="#FFFF9871" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
 
 
-                    <DataGridCheckBoxColumn Header="Seçili" Binding="{Binding Chosen, UpdateSourceTrigger=PropertyChanged}" />
-                    <DataGridTextColumn Header="İsim" Binding="{Binding Name}" Width="200" />
-                    <DataGridTextColumn Header="Ücret" Binding="{Binding Fee}" Width="70"/>
-                    <DataGridTextColumn Header="KDV Hariç" IsReadOnly="True" Binding="{Binding Fee_wo_kdv}" Width="70"/>
-                    <DataGridTextColumn Header="Kesilen KDV" IsReadOnly="True" Binding="{Binding Cuted_kdv}" Width="40"/>
+                <DataGridCheckBoxColumn Header="Seçili" Binding="{Binding Chosen, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="İsim" Binding="{Binding Name}" Width="200" />
+                <DataGridTextColumn Header="Ücret" Binding="{Binding Fee}" Width="100"/>
+                <DataGridTextColumn Header="KDV Hariç" IsReadOnly="True" Binding="{Binding Fee_wo_kdv}" Width="100"/>
+                <DataGridTextColumn Header="Kesilen KDV" IsReadOnly="True" Binding="{Binding Cuted_kdv}" Width="100"/>
 
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Command="{Binding Main.EditStudentCommand, Mode=OneWay}" DataContext="{Binding Source={StaticResource Locator}}" Background="Transparent">
-                                    <StackPanel Orientation="Horizontal">
-                                        <Image Source="/Neslihan_Kres_Makbuz;component/Resources/edit.png" Width="20" Height="20"/>
-                                    </StackPanel>
-                                </Button>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-                <DataGrid.RowDetailsTemplate>
-                    <DataTemplate>
-                        <Border BorderThickness="0" Background="BlanchedAlmond" Padding="10">
-                            <StackPanel Orientation="Vertical">
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding Main.EditStudentCommand, Mode=OneWay}" DataContext="{Binding Source={StaticResource Locator}}" Background="Transparent">
                                 <StackPanel Orientation="Horizontal">
-                                    <StackPanel Orientation="Horizontal" Margin="10">
-                                        <TextBlock FontWeight="Bold" Text="TC: " VerticalAlignment="Center" />
-                                        <TextBox Foreground="MidnightBlue" Text="{Binding TC, Mode=TwoWay}" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Margin="10">
-                                        <TextBlock FontWeight="Bold" Text="Sınıf: " VerticalAlignment="Center" />
-                                        <TextBlock Foreground="MidnightBlue" Text="{Binding SClass}" VerticalAlignment="Center" />
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Margin="10">
-                                        <TextBlock FontWeight="Bold" Text="Durum: " VerticalAlignment="Center" />
-                                        <TextBlock Foreground="MidnightBlue" Text="{Binding Status}" VerticalAlignment="Center" />
-                                    </StackPanel>
+                                    <Image Source="/Neslihan_Kres_Makbuz;component/Resources/edit.png" Width="20" Height="20"/>
                                 </StackPanel>
-
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0" Background="#FFA0BF8B" Padding="10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <TextBlock FontWeight="Bold" Text="Adres: " VerticalAlignment="Center" />
-                                    <TextBox Foreground="MidnightBlue" Text="{Binding Address, Mode=TwoWay}" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" />
+                                    <TextBlock FontWeight="Bold" Text="TC: " VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding TC}" Background="Transparent" VerticalAlignment="Center" />
                                 </StackPanel>
-
                                 <StackPanel Orientation="Horizontal" Margin="10">
-                                    <TextBlock FontWeight="Bold" Text="Program: " VerticalAlignment="Center" />
-                                    <TextBox Foreground="MidnightBlue" Text="{Binding Program_desc, Mode=TwoWay}" Background="Transparent" BorderThickness="0" VerticalAlignment="Center" />
+                                    <TextBlock FontWeight="Bold" Text="Sınıf: " VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding SClass}" VerticalAlignment="Center" />
                                 </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="10">
+                                    <TextBlock FontWeight="Bold" Text="Durum: " VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Status}" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </StackPanel>
 
-                                <DataGrid 
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <TextBlock FontWeight="Bold" Text="Adres: " VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding Address}" Background="Transparent" VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="10">
+                                <TextBlock FontWeight="Bold" Text="Program: " VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding Program_desc}" Background="Transparent" VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <DataGrid 
                                     ItemsSource ="{Binding Receipts}" 
                                     IsReadOnly="True"
                                     Height="75"                                    
                                     AlternatingRowBackground="Bisque"                                                                        
                                     />
 
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </DataGrid.RowDetailsTemplate>
-            </DataGrid>
-            <DataGrid 
-                ItemsSource ="{Binding Receipts}" 
-                SelectedItem="{Binding SelectedReceipt}" 
-                Height="400"
-                AlternatingRowBackground="Bisque"
-                SelectionMode="Extended"
-                />
-
-        </StackPanel>
-    </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+    </Grid>
 </Window>

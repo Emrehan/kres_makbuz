@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Neslihan_Kres_Makbuz.View"
         mc:Ignorable="d"
-        Title="Öğrenci Düzenleme Ekranı" WindowStartupLocation="CenterOwner" Topmost="True" ResizeMode="NoResize">
+        Title="Öğrenci Düzenleme Ekranı" WindowStartupLocation="CenterOwner" Topmost="True" ResizeMode="NoResize" Height="277" Width="413">
     <Window.Resources>
         <Style x:Key="Header" TargetType="{x:Type TextBlock}">
             <Setter Property="Width" Value="64"/>
@@ -74,18 +74,18 @@
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition MinWidth="200" />
+            <ColumnDefinition MinWidth="200" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="42" />
-            <RowDefinition Height="32" />
-            <RowDefinition Height="32" />
-            <RowDefinition Height="32" />
-            <RowDefinition Height="32" />
+            <RowDefinition MinHeight="42" />
+            <RowDefinition MinHeight="32" />
+            <RowDefinition MinHeight="32" />
+            <RowDefinition MinHeight="32" />
+            <RowDefinition MinHeight="32" />
 
             <RowDefinition Height="10" />
-            <RowDefinition Height="30" />
+            <RowDefinition MinHeight="40" />
         </Grid.RowDefinitions>
 
         <!--Name-->
@@ -108,7 +108,7 @@
 
         <!--Fee-->
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-            <TextBlock Text="Ücret (KDV Dahil)" Style="{DynamicResource Header}" ></TextBlock>
+            <TextBlock Text="Ücret" Style="{DynamicResource Header}" ></TextBlock>
             <TextBox Text="{Binding Student.Fee}" Style="{DynamicResource Inputs}" ></TextBox>
         </StackPanel>
 
@@ -127,19 +127,19 @@
         <!--Program-->
         <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
             <TextBlock Text="Açıklama" Style="{DynamicResource Header}" ></TextBlock>
-            <TextBox Text="{Binding Student.Program_desc}" Style="{DynamicResource Inputs}" ></TextBox>
+            <TextBox Text="{Binding Student.Program_desc}" Style="{DynamicResource Inputs}" Width="333" ></TextBox>
         </StackPanel>
 
         <!--Address-->
         <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
             <TextBlock Text="Adres" Style="{DynamicResource Header}" ></TextBlock>
-            <TextBox Text="{Binding Student.Address}" Style="{DynamicResource Inputs}" ></TextBox>
+            <TextBox Text="{Binding Student.Address}" Style="{DynamicResource Inputs}"  Width="333"></TextBox>
         </StackPanel>
 
         <!--Address-->
-        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Button Content="Kaydet" Click="Button_Click" IsDefault="True" Margin="5"></Button>
-            <Button Content="İptal" IsCancel="True" Margin="5"></Button>
+        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" >
+            <Button Content="Kaydet" Click="Button_Click" IsDefault="True" Margin="5" Width="120" Height="30" ></Button>
+            <Button Content="İptal" IsCancel="True" Margin="5" Width="120" Height="30"></Button>
         </StackPanel>
     </Grid>
 </Window>

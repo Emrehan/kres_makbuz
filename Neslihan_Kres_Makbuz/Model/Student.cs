@@ -148,7 +148,7 @@ namespace Neslihan_Kres_Makbuz.Model
             get => fee;
             set
             {
-                Set<double>(() => this.Fee, ref fee, value);
+                Set<double>(() => this.Fee, ref fee, Math.Round(value,2));
 
                 CalculateFee();
             }
@@ -159,7 +159,7 @@ namespace Neslihan_Kres_Makbuz.Model
             get => fee_wo_kdv;
             private set
             {
-                Set<double>(() => this.Fee_wo_kdv, ref fee_wo_kdv, value);
+                Set<double>(() => this.Fee_wo_kdv, ref fee_wo_kdv, Math.Round(value, 2));
             }
         }
 
@@ -168,7 +168,7 @@ namespace Neslihan_Kres_Makbuz.Model
             get => cuted_kdv;
             private set
             {
-                Set<double>(() => this.Cuted_kdv, ref cuted_kdv, value);
+                Set<double>(() => this.Cuted_kdv, ref cuted_kdv, Math.Round(value, 2));
             }
         }
 
