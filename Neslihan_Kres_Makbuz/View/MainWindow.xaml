@@ -10,7 +10,10 @@
         Title="Harikalar Diyarı Neslihan Kreş" Height="720" Width="1080" Background="#FFF0F0F0"
         >
     <Window.Resources>
-        <Converter:ChosenStudentConverter x:Key="ChosenStudentConverter"/>
+        <ResourceDictionary>
+            <Converter:ChosenStudentConverter x:Key="ChosenStudentConverter"/>
+            <Converter:StudentFilterToBoolConverter x:Key="StudentFilterToBoolConverter"/>
+        </ResourceDictionary>
     </Window.Resources>
     <Window.DataContext>
         <Binding Path="Main" Source="{StaticResource Locator}"/>
@@ -38,94 +41,142 @@
             </Canvas>
         </Viewbox>
 
-        <DataGrid 
-            Grid.Row="1"
-            Grid.Column="1"
-            x:Name="StudentDataGrid"
-            x:FieldModifier="public"
-            ItemsSource ="{Binding Students, UpdateSourceTrigger=PropertyChanged}" 
-            SelectedItem="{Binding SelectedStudent}" 
-            Height="400"
-            Width="590"
-            AlternatingRowBackground="#FFDCF4FF"
+        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Content="Tamamı" Margin="5" IsChecked="{Binding FilterType, Converter={StaticResource StudentFilterToBoolConverter}, ConverterParameter=ALL}" Command="{Binding FilterTypeCommand}" />
+                <RadioButton Content="Bu Ay Fature Kesilmeyenler" Margin="5" IsChecked="{Binding FilterType, Converter={StaticResource StudentFilterToBoolConverter}, ConverterParameter=NOT_PAID}" Command="{Binding FilterTypeCommand}" />
+            </StackPanel>
+            <DataGrid 
+                x:Name="StudentDataGrid"
+                ItemsSource ="{Binding Students, UpdateSourceTrigger=PropertyChanged}" 
+                SelectedItem="{Binding SelectedStudent}" 
+                Height="400"
+                Width="400"
+                AlternatingRowBackground="#FFDCF4FF"
                 
-            SelectionMode="Extended"
-            AutoGenerateColumns="False"
-            HeadersVisibility="All"
-            KeyboardNavigation.ControlTabNavigation="None"
-            EnableColumnVirtualization="True"
-            EnableRowVirtualization="True" Background="{x:Null}" RowBackground="#FFB1DBFF" 
-            >
-            <DataGrid.RowStyle>
-                <Style TargetType="{x:Type DataGridRow}">
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True" >
-                            <Setter Property="Background" Value="#FFFF9871" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DataGrid.RowStyle>
-            <DataGrid.Columns>
+                SelectionMode="Extended"
+                AutoGenerateColumns="False"
+                HeadersVisibility="Column"
+                KeyboardNavigation.ControlTabNavigation="None"
+                EnableColumnVirtualization="True"                
+                EnableRowVirtualization="True" Background="{x:Null}" RowBackground="#FFB1DBFF" 
+                >
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True" >
+                                <Setter Property="Background" Value="#FFFF9871" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Header="Seç" Width="30" Binding="{Binding Chosen, UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridTextColumn Header="İsim" Binding="{Binding Name}" Width="324" />
 
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding Main.EditStudentCommand, Mode=OneWay}" DataContext="{Binding Source={StaticResource Locator}}" Background="Transparent">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/Neslihan_Kres_Makbuz;component/Resources/edit.png" Width="20" Height="20"/>
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="0" Background="#FFA0BF8B" Padding="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
 
-                <DataGridCheckBoxColumn Header="Seçili" Binding="{Binding Chosen, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="İsim" Binding="{Binding Name}" Width="200" />
-                <DataGridTextColumn Header="Ücret" Binding="{Binding Fee}" Width="100"/>
-                <DataGridTextColumn Header="KDV Hariç" IsReadOnly="True" Binding="{Binding Fee_wo_kdv}" Width="100"/>
-                <DataGridTextColumn Header="Kesilen KDV" IsReadOnly="True" Binding="{Binding Cuted_kdv}" Width="100"/>
-
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Command="{Binding Main.EditStudentCommand, Mode=OneWay}" DataContext="{Binding Source={StaticResource Locator}}" Background="Transparent">
-                                <StackPanel Orientation="Horizontal">
-                                    <Image Source="/Neslihan_Kres_Makbuz;component/Resources/edit.png" Width="20" Height="20"/>
+                                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                                    <TextBlock FontWeight="Bold" Text="Ücret: " VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Fee}" Background="Transparent" VerticalAlignment="Center"/>
                                 </StackPanel>
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-            <DataGrid.RowDetailsTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="0" Background="#FFA0BF8B" Padding="10">
-                        <StackPanel Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Orientation="Horizontal" Margin="10">
+
+                                <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" >
+                                    <TextBlock FontWeight="Bold" Text="KDV Hariç: " VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Fee_wo_kdv}" Background="Transparent" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" >
+                                    <TextBlock FontWeight="Bold" Text="Kesilen KDV: " VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Cuted_kdv}" Background="Transparent" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                
+                                <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal">
                                     <TextBlock FontWeight="Bold" Text="TC: " VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding TC}" Background="Transparent" VerticalAlignment="Center" />
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="10">
+
+                                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
                                     <TextBlock FontWeight="Bold" Text="Sınıf: " VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding SClass}" VerticalAlignment="Center" />
                                 </StackPanel>
-                                <StackPanel Orientation="Horizontal" Margin="10">
+
+                                <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal">
                                     <TextBlock FontWeight="Bold" Text="Durum: " VerticalAlignment="Center" />
                                     <TextBlock Text="{Binding Status}" VerticalAlignment="Center" />
                                 </StackPanel>
-                            </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="10">
-                                <TextBlock FontWeight="Bold" Text="Adres: " VerticalAlignment="Center" />
-                                <TextBlock Text="{Binding Address}" Background="Transparent" VerticalAlignment="Center" />
-                            </StackPanel>
+                                <StackPanel Grid.Row="2" Grid.ColumnSpan="5" Orientation="Horizontal" >
+                                    <TextBlock FontWeight="Bold" Text="Adres: " VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Address}" Background="Transparent" VerticalAlignment="Center" />
+                                </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="10">
-                                <TextBlock FontWeight="Bold" Text="Program: " VerticalAlignment="Center" />
-                                <TextBlock Text="{Binding Program_desc}" Background="Transparent" VerticalAlignment="Center" />
-                            </StackPanel>
+                                <StackPanel Grid.Row="3" Grid.ColumnSpan="5" Orientation="Horizontal" >
+                                    <TextBlock FontWeight="Bold" Text="Program: " VerticalAlignment="Center" />
+                                    <TextBlock Text="{Binding Program_desc}" Background="Transparent" VerticalAlignment="Center" />
+                                </StackPanel>
 
-                            <DataGrid 
-                                    ItemsSource ="{Binding Receipts}" 
-                                    IsReadOnly="True"
-                                    Height="75"                                    
-                                    AlternatingRowBackground="Bisque"                                                                        
-                                    />
-
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
-        </DataGrid>
+                                <StackPanel Grid.Row="4" Grid.ColumnSpan="5">
+                                    <TextBlock FontWeight="Bold" Text="Bordrolar :" VerticalAlignment="Center" />
+                                    <DataGrid 
+                                        ItemsSource ="{Binding Receipts}" 
+                                        IsReadOnly="True"
+                                        MaxHeight="100"
+                                        Width="100"
+                                        AlternatingRowBackground="Bisque"
+                                    
+                                        AutoGenerateColumns="False"
+                                        HeadersVisibility="Column"
+                                        KeyboardNavigation.ControlTabNavigation="None"
+                                        EnableColumnVirtualization="True"
+                                        EnableRowVirtualization="True" 
+                                    >
+                                        <DataGrid.RowStyle>
+                                            <Style TargetType="{x:Type DataGridRow}">
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsSelected" Value="True" >
+                                                        <Setter Property="Background" Value="#FFFF9871" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </DataGrid.RowStyle>
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Width="81" Header="Tarih" Binding="{Binding CreateDate, StringFormat='\{0:dd.MM.yyyy\}'}" />
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </Window>

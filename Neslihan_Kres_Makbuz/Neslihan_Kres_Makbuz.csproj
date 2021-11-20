@@ -132,6 +132,7 @@
     </ApplicationDefinition>
     <Compile Include="Config\Globals.cs" />
     <Compile Include="Converter\ChosenStudentConverter.cs" />
+    <Compile Include="Converter\StudentFilterToBoolConverter.cs" />
     <Compile Include="Message\KDVChangedMessage.cs" />
     <Compile Include="Model\Receipt.cs" />
     <Compile Include="Model\Student.cs" />

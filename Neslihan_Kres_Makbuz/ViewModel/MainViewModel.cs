@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System;
 using System.Linq;
+using Neslihan_Kres_Makbuz.Converter;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
 {
@@ -17,6 +18,8 @@ namespace Neslihan_Kres_Makbuz.ViewModel
 
         private ObservableCollection<Receipt> _receipts;
         private Receipt _selectedReceipt;
+
+        private StudentsFilterType _filterType = StudentsFilterType.ALL;
 
         private string _version;
         private Globals _global;
@@ -37,11 +40,13 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             }
 
             EditStudentCommand = new RelayCommand(EditStudentMethod);
+            FilterTypeCommand = new RelayCommand(FilterTypeMethod);
 
             Version = "1.0";
         }
 
         public ICommand EditStudentCommand { get; private set; }
+        public ICommand FilterTypeCommand { get; private set; }
 
         #region Properties
         public string Version
@@ -115,6 +120,18 @@ namespace Neslihan_Kres_Makbuz.ViewModel
                 Set<Globals>(() => this.Global, ref _global, value);
             }
         } 
+
+        public StudentsFilterType FilterType
+        {
+            get
+            {
+                return _filterType;
+            }
+            set
+            {
+                Set<StudentsFilterType>(() => this.FilterType, ref _filterType, value);
+            }
+        } 
         #endregion
 
         private void EditStudentMethod()
@@ -127,6 +144,11 @@ namespace Neslihan_Kres_Makbuz.ViewModel
                 //Students.Add(editedStudent);
                 SelectedStudent = editedStudent;
             }
+        }
+        
+        private void FilterTypeMethod()
+        {
+            Console.WriteLine("" + FilterType);
         }
     }
 }
