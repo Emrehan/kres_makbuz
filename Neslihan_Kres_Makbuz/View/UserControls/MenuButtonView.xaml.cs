@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Neslihan_Kres_Makbuz.View
+namespace Neslihan_Kres_Makbuz.ViewModel
 {
     /// <summary>
-    /// Interaction logic for MainScreen.xaml
+    /// Interaction logic for MenuButtonView.xaml
     /// </summary>
-    public partial class MainScreen : Window
+    public partial class MenuButtonView : UserControl
     {
-        public MainScreen()
+        public MenuButtonView()
         {
             InitializeComponent();
         }
