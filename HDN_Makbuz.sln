@@ -9,18 +9,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Neslihan_Kres_Makbuz", "Nes
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{92A8957D-FF69-49DE-8E4D-9295247F1ADF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92A8957D-FF69-49DE-8E4D-9295247F1ADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92A8957D-FF69-49DE-8E4D-9295247F1ADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92A8957D-FF69-49DE-8E4D-9295247F1ADF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A42DCC8A-B145-4906-A1F6-87C3A2B2E3E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A42DCC8A-B145-4906-A1F6-87C3A2B2E3E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A42DCC8A-B145-4906-A1F6-87C3A2B2E3E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A42DCC8A-B145-4906-A1F6-87C3A2B2E3E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92A8957D-FF69-49DE-8E4D-9295247F1ADF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{92A8957D-FF69-49DE-8E4D-9295247F1ADF}.Release|x64.ActiveCfg = Release|Any CPU
+		{A42DCC8A-B145-4906-A1F6-87C3A2B2E3E5}.Debug|x64.ActiveCfg = Debug|x64
+		{A42DCC8A-B145-4906-A1F6-87C3A2B2E3E5}.Debug|x64.Build.0 = Debug|x64
+		{A42DCC8A-B145-4906-A1F6-87C3A2B2E3E5}.Release|x64.ActiveCfg = Release|x64
+		{A42DCC8A-B145-4906-A1F6-87C3A2B2E3E5}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
