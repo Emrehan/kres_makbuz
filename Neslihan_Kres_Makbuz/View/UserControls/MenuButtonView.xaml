@@ -33,6 +33,19 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Column="1" Text="Çocuk Listesi" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <TextBlock Grid.Column="3" Width="4" />
+        <TextBlock Grid.Column="3" Width="4" >
+            <TextBlock.Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Selected}" Value="True" >
+                            <Setter Property="Background" Value="{StaticResource Primary}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Hover}" Value="True" >
+                            <Setter Property="Background" Value="{StaticResource Secondary}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
     </Grid>
 </UserControl>

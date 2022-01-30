@@ -31,7 +31,7 @@
         <!--#endregion-->
         
         <!--#region LEFT MENU -->
-        <usercontrols:NavigationBarView Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"  />
+        <usercontrols:NavigationBarView Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" MouseDown="Window_MouseDown" />
         <!--#endregion-->
 
         <!--#region TOP MENU -->
@@ -44,7 +44,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="3" Content="X" Style="{DynamicResource WindowsCloseButton}" Command="{Binding CloseApplicationCommand}" />
-            <Button Grid.Column="2" Content="□" Style="{DynamicResource WindowsButton}" Command="{Binding MaximizeApplicationCommand}" />
+            <Button Grid.Column="2" Content="□" Style="{DynamicResource WindowsButton}" Command="{Binding MaximizeApplicationCommand}" Margin="0 -5 0 0" />
             <Button Grid.Column="1" Content="-" Style="{DynamicResource WindowsButton}" Command="{Binding MinimizeApplicationCommand}" />
         </Grid>
         <!--#endregion-->

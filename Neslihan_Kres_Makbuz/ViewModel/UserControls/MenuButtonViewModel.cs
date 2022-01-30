@@ -9,8 +9,8 @@ namespace Neslihan_Kres_Makbuz.ViewModel
 {
     public enum MENUS
     {        
+        TEMP,
         STUDENTS,
-        TEMP
     }
 
     public class MenuButtonViewModel : ViewModelBase

@@ -28,7 +28,7 @@ namespace Neslihan_Kres_Makbuz.View
         {
             if (e.ChangedButton == MouseButton.Left)
             {
-                var window = Window.GetWindow(sender as Grid);
+                var window = Window.GetWindow(sender as FrameworkElement);
                 window.DragMove();
             }
         }
