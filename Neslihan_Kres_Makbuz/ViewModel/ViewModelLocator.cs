@@ -35,6 +35,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             SimpleIoc.Default.Register<MainScreenViewModel>();
             SimpleIoc.Default.Register<StudentEditWindowViewModel>();
             SimpleIoc.Default.Register<MenuButtonViewModel>();
+            SimpleIoc.Default.Register<StudentScreenViewModel>(true);
         }
 
         public MainScreenViewModel MainScreen
@@ -66,6 +67,14 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MenuButtonViewModel > ();
+            }
+        }
+
+        public StudentScreenViewModel StudentScreen
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<StudentScreenViewModel> ();
             }
         }
 

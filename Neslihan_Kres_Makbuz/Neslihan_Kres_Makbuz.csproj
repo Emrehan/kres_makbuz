@@ -138,6 +138,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Config\Globals.cs" />
+    <Compile Include="Converter\CheckNullToVisibilityConverter.cs" />
     <Compile Include="Converter\ChosenStudentConverter.cs" />
     <Compile Include="Converter\StudentFilterToBoolConverter.cs" />
     <Compile Include="Message\KDVChangedMessage.cs" />
@@ -148,7 +149,11 @@
     </Compile>
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\StudentScreenViewModel.cs" />
     <Compile Include="ViewModel\UserControls\MenuButtonViewModel.cs" />
+    <Compile Include="View\StudentScreenView.xaml.cs">
+      <DependentUpon>StudentScreenView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UserControls\MenuButtonView.xaml.cs">
       <DependentUpon>MenuButtonView.xaml</DependentUpon>
     </Compile>
@@ -168,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\SVG\NeslihanIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StudentScreenView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

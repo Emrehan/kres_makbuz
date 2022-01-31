@@ -25,9 +25,11 @@
         </Grid.RowDefinitions>
 
         <!--#region Content -->
-        <Grid Grid.Row="1" Grid.Column="1" Background="DarkGray" >
-            
-        </Grid>
+        <TabControl Grid.Row="1" Grid.Column="1" >
+            <TabItem Visibility="Collapsed">
+                <Frame x:Name="StudentFrame" Source="StudentScreenView.xaml" />
+            </TabItem>
+        </TabControl>
         <!--#endregion-->
         
         <!--#region LEFT MENU -->

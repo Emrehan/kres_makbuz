@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="Neslihan_Kres_Makbuz.View.StudentScreenView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Neslihan_Kres_Makbuz.View"
+             xmlns:Converter="clr-namespace:Neslihan_Kres_Makbuz.Converter"
+             mc:Ignorable="d" 
+             Background="{StaticResource Surface}"
+             >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Converter:CheckNullToVisibilityConverter x:Key="CheckNullToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <Binding Path="StudentScreen" Source="{StaticResource Locator}"/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- DATAGRID -->
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <DataGrid 
+                Grid.Row="0" Grid.Column="0"
+                x:Name="StudentsDataGrid"
+                Width="800"
+                Height="400"
+                ItemsSource="{Binding Students}"
+                SelectedItem="{Binding SelectedStudent, Mode=TwoWay}"
+                SelectionMode="Single"
+                AutoGenerateColumns="False"
+                HeadersVisibility="Column"
+                KeyboardNavigation.ControlTabNavigation="None"
+                EnableColumnVirtualization="True"                
+                EnableRowVirtualization="True" 
+                Background="Transparent"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserResizeRows="False"
+                IsReadOnly="True"
+                >
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Foreground" Value="{StaticResource OnSurface}" />
+                        <Setter Property="BorderBrush" Value="{StaticResource Surface}"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="Width" Value="auto"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontStretch" Value="Expanded"/>
+                        <Setter Property="FontSize" Value="14"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="Foreground" Value="{StaticResource OnSurface}" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="Height" Value="32" />
+                        <Setter Property="BorderBrush" Value="{x:Null}" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{StaticResource Primary}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Background" Value="{StaticResource SurfaceVariant}"/>
+                        <Setter Property="Foreground" Value="{StaticResource OnSurface}"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="Height" Value="32"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Header="" Width="50" Binding="{Binding Chosen, UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridTextColumn Header="İsim" Binding="{Binding Name}" Width="250" />
+                    <DataGridTextColumn Header="Ücret" Binding="{Binding Fee, StringFormat=₺ {0}}" Width="100" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <!-- /DATAGRID -->
+
+        <Grid Grid.Column="1">
+            <TextBlock Width="200" Height="200" Text="{Binding SelectedStudent.Name}" Visibility="{Binding SelectedStudent, Converter={StaticResource CheckNullToVisibilityConverter}}" />
+        </Grid>
+    </Grid>
+</UserControl>

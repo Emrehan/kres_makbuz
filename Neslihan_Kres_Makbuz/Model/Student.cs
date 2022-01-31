@@ -38,19 +38,19 @@ namespace Neslihan_Kres_Makbuz.Model
         private static int studentIDCount = 0;
 
         private int id;
-        private string name;
-        private string tc;
-        private CLASSES sClass;
-        private SEX sex;
-        private STATUS status;
+        private string _name;
+        private string _tc;
+        private CLASSES _sClass;
+        private SEX _sex;
+        private STATUS _status;
 
-        private double fee;
+        private double _fee;
         private double fee_wo_kdv;
-        private double cuted_kdv;
-        private string program_desc; //How many days student attemp
-        private string address;
+        private double _cutedKDV;
+        private string _programDesc; //How many days student attemp
+        private string _address;
 
-        private bool chosen;
+        private bool _selected;
 
         private ObservableCollection<Receipt> receipts;
 
@@ -63,7 +63,7 @@ namespace Neslihan_Kres_Makbuz.Model
 
         public override string ToString()
         {
-            return Name + " " + tc;
+            return Name + " " + _tc;
         }
 
         #region PROPERTIES
@@ -76,9 +76,9 @@ namespace Neslihan_Kres_Makbuz.Model
                 .RuleFor(p => p.Sex, f => f.PickRandom<SEX>())
                 .RuleFor(p => p.Status, f => f.PickRandom<STATUS>())
                 .RuleFor(p => p.Fee, (f, p) => f.Random.Float(500, 2000))
-                .RuleFor(p => p.Program_desc, f => f.Lorem.Sentence(3))
+                .RuleFor(p => p.ProgramDesc, f => f.Lorem.Sentence(3))
                 .RuleFor(p => p.Address, f => f.Address.FullAddress())
-                .RuleFor(p => p.Chosen, f => f.Random.Bool());
+                .RuleFor(p => p.Selected, f => f.Random.Bool());
 
         public int ID
         { 
@@ -100,55 +100,55 @@ namespace Neslihan_Kres_Makbuz.Model
 
         public string Name
         {
-            get => name;
+            get => _name;
             set
             {
-                Set<string>(() => this.Name, ref name, value);
+                Set<string>(() => this.Name, ref _name, value);
             }
         }
 
         public string TC
         {
-            get => tc;
+            get => _tc;
             set
             {
-                Set<string>(() => this.TC, ref tc, value);
+                Set<string>(() => this.TC, ref _tc, value);
             }
         }
 
         public CLASSES SClass
         {
-            get => sClass;
+            get => _sClass;
             set
             {
-                Set<CLASSES>(() => this.SClass, ref sClass, value);
+                Set<CLASSES>(() => this.SClass, ref _sClass, value);
             }
         }
 
         public SEX Sex
         {
-            get => sex;
+            get => _sex;
             set
             {
-                Set<SEX>(() => this.Sex, ref sex, value);
+                Set<SEX>(() => this.Sex, ref _sex, value);
             }
         }
 
         public STATUS Status
         {
-            get => status;
+            get => _status;
             set
             {
-                Set<STATUS>(() => this.Status, ref status, value);
+                Set<STATUS>(() => this.Status, ref _status, value);
             }
         }
 
         public double Fee
         {
-            get => fee;
+            get => _fee;
             set
             {
-                Set<double>(() => this.Fee, ref fee, Math.Round(value,2));
+                Set<double>(() => this.Fee, ref _fee, Math.Round(value,2));
 
                 CalculateFee();
             }
@@ -163,39 +163,39 @@ namespace Neslihan_Kres_Makbuz.Model
             }
         }
 
-        public double Cuted_kdv
+        public double CutedKDV
         {
-            get => cuted_kdv;
+            get => _cutedKDV;
             private set
             {
-                Set<double>(() => this.Cuted_kdv, ref cuted_kdv, Math.Round(value, 2));
+                Set<double>(() => this.CutedKDV, ref _cutedKDV, Math.Round(value, 2));
             }
         }
 
-        public string Program_desc
+        public string ProgramDesc
         {
-            get => program_desc;
+            get => _programDesc;
             set
             {
-                Set<string>(() => this.Program_desc, ref program_desc, value);
+                Set<string>(() => this.ProgramDesc, ref _programDesc, value);
             }
         }
 
         public string Address
         {
-            get => address;
+            get => _address;
             set
             {
-                Set<string>(() => this.Address, ref address, value);
+                Set<string>(() => this.Address, ref _address, value);
             }
         }
 
-        public bool Chosen
+        public bool Selected
         {
-            get => chosen;
+            get => _selected;
             set
             {
-                Set<bool>(() => this.Chosen, ref chosen, value);
+                Set<bool>(() => this.Selected, ref _selected, value);
             }
         }
 
@@ -206,7 +206,7 @@ namespace Neslihan_Kres_Makbuz.Model
         private void CalculateFee()
         {
             Fee_wo_kdv = Math.Round(((Fee * 100) / (100 + Globals.Instance.KDV)), 2);
-            Cuted_kdv = Math.Round(Fee - this.Fee_wo_kdv, 2);
+            CutedKDV = Math.Round(Fee - this.Fee_wo_kdv, 2);
         }
         #endregion
     }

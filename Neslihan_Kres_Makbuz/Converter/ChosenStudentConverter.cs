@@ -27,7 +27,7 @@ namespace Neslihan_Kres_Makbuz.Converter
                 throw new ArgumentException("Value is not a ObservableCollection<Student>.");
             }
 
-            return studentList.Where(f => f.Chosen).ToList();
+            return studentList.Where(f => f.Selected).ToList();
         }
 
         /// <inheritdoc />
@@ -45,7 +45,7 @@ namespace Neslihan_Kres_Makbuz.Converter
                 throw new ArgumentException("Value is not a ObservableCollection<Student>.");
             }
 
-            return studentList.Where(f => f.Chosen).ToList();
+            return studentList.Where(f => f.Selected).ToList();
         }
     }
 }
