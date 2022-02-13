@@ -18,8 +18,8 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition MinWidth="300" />
+            <ColumnDefinition Width="700" MinWidth="650" MaxWidth="700" />
         </Grid.ColumnDefinitions>
 
         <!-- DATAGRID -->
@@ -49,6 +49,8 @@
                 CanUserDeleteRows="False"
                 CanUserResizeRows="False"
                 IsReadOnly="True"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
                 >
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
@@ -86,7 +88,15 @@
                     </Style>
                 </DataGrid.RowStyle>
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn Header="" Width="50" Binding="{Binding Chosen, UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridCheckBoxColumn Header="" Width="50" Binding="{Binding Selected, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGridCheckBoxColumn.ElementStyle>
+                            <Style TargetType="CheckBox">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Setter Property="BorderThickness" Value="0" />
+                            </Style>
+                        </DataGridCheckBoxColumn.ElementStyle>
+                    </DataGridCheckBoxColumn>
                     <DataGridTextColumn Header="İsim" Binding="{Binding Name}" Width="250" />
                     <DataGridTextColumn Header="Ücret" Binding="{Binding Fee, StringFormat=₺ {0}}" Width="100" />
                 </DataGrid.Columns>
@@ -94,8 +104,16 @@
         </Grid>
         <!-- /DATAGRID -->
 
-        <Grid Grid.Column="1">
-            <TextBlock Width="200" Height="200" Text="{Binding SelectedStudent.Name}" Visibility="{Binding SelectedStudent, Converter={StaticResource CheckNullToVisibilityConverter}}" />
+        <!-- STUDENT DETAILS -->
+        <Grid Grid.Column="1" Visibility="{Binding SelectedStudent, Converter={StaticResource CheckNullToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <Button Grid.Row="0" Content="X" Command="{Binding CloseStudentDetailCommand}" />
+            <local:StudentDetailsView Grid.Row="1" />
         </Grid>
+        <!-- /STUDENT DETAILS -->
     </Grid>
 </UserControl>

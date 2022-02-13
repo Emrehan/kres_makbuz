@@ -35,7 +35,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             foreach (var r in Receipts)
             {
                 var s = Students[rn.Next(Students.Count)];
-                r.student = s;
+                r.Student = s;
                 s.Receipts.Add(r);
             }
 

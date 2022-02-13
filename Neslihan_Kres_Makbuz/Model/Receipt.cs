@@ -60,12 +60,12 @@ namespace Neslihan_Kres_Makbuz.Model
                 Set<string>(() => this.WaybillNo, ref waybillNo, value);
             }
         }
-        public Student student
+        public Student Student
         {
             get => _student;
             set
             {
-                Set<Student>(() => this.student, ref _student, value);
+                Set<Student>(() => this.Student, ref _student, value);
             }
         }
         public double KDV

@@ -142,15 +142,20 @@
     <Compile Include="Converter\ChosenStudentConverter.cs" />
     <Compile Include="Converter\StudentFilterToBoolConverter.cs" />
     <Compile Include="Message\KDVChangedMessage.cs" />
+    <Compile Include="Message\SelectedStudentChangedMessage.cs" />
     <Compile Include="Model\Receipt.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="Resources\SVG\NeslihanIcon.xaml.cs">
       <DependentUpon>NeslihanIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
+    <Compile Include="ViewModel\StudentDetailsViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\StudentScreenViewModel.cs" />
     <Compile Include="ViewModel\UserControls\MenuButtonViewModel.cs" />
+    <Compile Include="View\StudentDetailsView.xaml.cs">
+      <DependentUpon>StudentDetailsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StudentScreenView.xaml.cs">
       <DependentUpon>StudentScreenView.xaml</DependentUpon>
     </Compile>
@@ -173,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\SVG\NeslihanIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StudentDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

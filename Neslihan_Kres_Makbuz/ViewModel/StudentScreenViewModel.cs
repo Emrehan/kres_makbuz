@@ -1,4 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using Neslihan_Kres_Makbuz.Message;
 using Neslihan_Kres_Makbuz.Model;
 using System;
 using System.Collections.Generic;
@@ -6,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
 {
@@ -13,6 +17,8 @@ namespace Neslihan_Kres_Makbuz.ViewModel
     {
         public StudentScreenViewModel()
         {
+            CloseStudentDetailCommand = new RelayCommand(CloseStudentDetailMethod);
+
             Students = new ObservableCollection<Student>(Student.FakeData.Generate(50).ToArray());
             Receipts = new ObservableCollection<Receipt>(Receipt.FakeData.Generate(6000).ToArray());
 
@@ -20,7 +26,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             foreach (var r in Receipts)
             {
                 var s = Students[rn.Next(Students.Count)];
-                r.student = s;
+                r.Student = s;
                 s.Receipts.Add(r);
             }
         }
@@ -39,7 +45,11 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         public Student SelectedStudent
         {
             get => _selectedStudent;
-            set { Set<Student>(() => this.SelectedStudent, ref _selectedStudent, value); }
+            set 
+            { 
+                Set<Student>(() => this.SelectedStudent, ref _selectedStudent, value);
+                Messenger.Default.Send(new SelectedStudentChangedMessage(value));
+            }
         }
         public ObservableCollection<Receipt> Receipts
         {
@@ -51,5 +61,13 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             get => _selectedReceipt;
             set { Set<Receipt>(() => this.SelectedReceipt, ref _selectedReceipt, value); }
         }
+
+        #region CloseStudentDetailCommand
+        public ICommand CloseStudentDetailCommand { get; private set; }
+        private void CloseStudentDetailMethod()
+        {
+            SelectedStudent = null;
+        }
+        #endregion
     }
 }
