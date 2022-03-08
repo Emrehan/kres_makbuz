@@ -106,12 +106,6 @@
 
         <!-- STUDENT DETAILS -->
         <Grid Grid.Column="1" Visibility="{Binding SelectedStudent, Converter={StaticResource CheckNullToVisibilityConverter}}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            
-            <Button Grid.Row="0" Content="X" Command="{Binding CloseStudentDetailCommand}" />
             <local:StudentDetailsView Grid.Row="1" />
         </Grid>
         <!-- /STUDENT DETAILS -->

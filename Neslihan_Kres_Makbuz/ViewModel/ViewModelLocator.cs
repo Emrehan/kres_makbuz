@@ -31,6 +31,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         public ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<MainScreenViewModel>();
             SimpleIoc.Default.Register<StudentEditWindowViewModel>();

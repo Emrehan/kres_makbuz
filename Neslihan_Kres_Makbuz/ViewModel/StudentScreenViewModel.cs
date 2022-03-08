@@ -17,8 +17,6 @@ namespace Neslihan_Kres_Makbuz.ViewModel
     {
         public StudentScreenViewModel()
         {
-            CloseStudentDetailCommand = new RelayCommand(CloseStudentDetailMethod);
-
             Students = new ObservableCollection<Student>(Student.FakeData.Generate(50).ToArray());
             Receipts = new ObservableCollection<Receipt>(Receipt.FakeData.Generate(6000).ToArray());
 
@@ -29,6 +27,14 @@ namespace Neslihan_Kres_Makbuz.ViewModel
                 r.Student = s;
                 s.Receipts.Add(r);
             }
+
+            Messenger.Default.Register<SelectedStudentChangedMessage>(this, (SelectedStudentChangedMessage newStudent) =>
+            {
+                if (newStudent.SelectedStudent == null)
+                {
+                    SelectedStudent = newStudent.SelectedStudent;
+                }
+            });
         }
 
         private ObservableCollection<Student> _students;
@@ -46,9 +52,12 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         {
             get => _selectedStudent;
             set 
-            { 
+            {
+                if (value != null)
+                {
+                    Messenger.Default.Send(new SelectedStudentChangedMessage(value)); 
+                }
                 Set<Student>(() => this.SelectedStudent, ref _selectedStudent, value);
-                Messenger.Default.Send(new SelectedStudentChangedMessage(value));
             }
         }
         public ObservableCollection<Receipt> Receipts
@@ -61,13 +70,5 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             get => _selectedReceipt;
             set { Set<Receipt>(() => this.SelectedReceipt, ref _selectedReceipt, value); }
         }
-
-        #region CloseStudentDetailCommand
-        public ICommand CloseStudentDetailCommand { get; private set; }
-        private void CloseStudentDetailMethod()
-        {
-            SelectedStudent = null;
-        }
-        #endregion
     }
 }

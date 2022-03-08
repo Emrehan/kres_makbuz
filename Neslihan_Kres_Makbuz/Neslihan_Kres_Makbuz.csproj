@@ -140,9 +140,11 @@
     <Compile Include="Config\Globals.cs" />
     <Compile Include="Converter\CheckNullToVisibilityConverter.cs" />
     <Compile Include="Converter\ChosenStudentConverter.cs" />
+    <Compile Include="Converter\StudentClassConverter.cs" />
+    <Compile Include="Converter\StudentStatusConverter.cs" />
     <Compile Include="Converter\StudentFilterToBoolConverter.cs" />
-    <Compile Include="Message\KDVChangedMessage.cs" />
     <Compile Include="Message\SelectedStudentChangedMessage.cs" />
+    <Compile Include="Message\KDVChangedMessage.cs" />
     <Compile Include="Model\Receipt.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="Resources\SVG\NeslihanIcon.xaml.cs">
@@ -264,6 +266,14 @@
     <Resource Include="Resources\neslihan_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\kid_photo.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

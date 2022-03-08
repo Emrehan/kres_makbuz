@@ -17,11 +17,21 @@ namespace Neslihan_Kres_Makbuz.ViewModel
 
         public StudentDetailsViewModel()
         {
+            CloseStudentDetailCommand = new RelayCommand(CloseStudentDetailMethod);
+
             Messenger.Default.Register<SelectedStudentChangedMessage>(this, (SelectedStudentChangedMessage newStudent) => 
             {
                 Student = newStudent.SelectedStudent;
             });
         }
+
+        #region CloseStudentDetailCommand
+        public ICommand CloseStudentDetailCommand { get; private set; }
+        private void CloseStudentDetailMethod()
+        {
+            Messenger.Default.Send(new SelectedStudentChangedMessage(null));
+        }
+        #endregion
 
         #region Properties
         private Student _student;
