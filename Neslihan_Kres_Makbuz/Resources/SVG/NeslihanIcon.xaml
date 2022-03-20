@@ -9,7 +9,7 @@
     <UserControl.Background>
         <RadialGradientBrush>
             <GradientStop Color="#00000000" Offset="1"/>
-            <GradientStop Color="{Binding Mode=OneWay, Source={StaticResource Primary}}" Offset="0.899"/>
+            <GradientStop Color="{Binding Mode=OneWay, Source={StaticResource Primary1}}" Offset="0.899"/>
         </RadialGradientBrush>
     </UserControl.Background>
     <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay}" >

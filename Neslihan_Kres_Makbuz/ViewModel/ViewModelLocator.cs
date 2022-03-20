@@ -15,6 +15,7 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using Neslihan_Kres_Makbuz.Config;
 using System.Windows;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
@@ -35,9 +36,11 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<MainScreenViewModel>();
             SimpleIoc.Default.Register<StudentEditWindowViewModel>();
-            SimpleIoc.Default.Register<MenuButtonViewModel>();
             SimpleIoc.Default.Register<StudentScreenViewModel>(true);
             SimpleIoc.Default.Register<StudentDetailsViewModel>(true);
+            SimpleIoc.Default.Register<TabButtonViewModel>();
+            SimpleIoc.Default.Register<NavigationBarViewModel>();
+            SimpleIoc.Default.Register<MenuViewModel>();
         }
 
         public MainScreenViewModel MainScreen
@@ -64,14 +67,6 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             }
         }
 
-        public MenuButtonViewModel MenuButton
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MenuButtonViewModel > ();
-            }
-        }
-
         public StudentScreenViewModel StudentScreen
         {
             get
@@ -85,6 +80,31 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<StudentDetailsViewModel> ();
+            }
+        }
+
+        private static int _tabIndex = 0;
+        public TabButtonViewModel TabButton
+        {
+            get
+            {
+                return new TabButtonViewModel((TAB_ITEM)_tabIndex++);
+            }
+        }
+
+        public NavigationBarViewModel NavigationBar
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<NavigationBarViewModel>();
+            }
+        }
+
+        public MenuViewModel Menu
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<MenuViewModel>();
             }
         }
 

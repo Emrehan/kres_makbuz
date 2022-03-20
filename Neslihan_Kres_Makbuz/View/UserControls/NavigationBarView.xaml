@@ -5,9 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Neslihan_Kres_Makbuz.View.UserControls" 
              xmlns:svg="clr-namespace:Neslihan_Kres_Makbuz.Resources.SVG" 
-             xmlns:viewmodel="clr-namespace:Neslihan_Kres_Makbuz.ViewModel"
+             xmlns:view="clr-namespace:Neslihan_Kres_Makbuz.View"
              mc:Ignorable="d" >
-    <Grid Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay}">
+    <UserControl.DataContext>
+        <Binding Path="NavigationBar" Source="{StaticResource Locator}"/>
+    </UserControl.DataContext>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
             <RowDefinition Height="160" />
@@ -20,8 +23,8 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2">
-            <viewmodel:MenuButtonView Selected="True" />
-            <viewmodel:MenuButtonView />
+            <view:TabButtonView />
+            <view:TabButtonView />
         </StackPanel>
 
         <TextBlock Grid.Row="3" Text="{DynamicResource Version}" Style="{DynamicResource SmallText}" />

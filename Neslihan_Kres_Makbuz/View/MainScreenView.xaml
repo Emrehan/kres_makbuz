@@ -9,8 +9,7 @@
         Height="720" Width="1080" 
         WindowStyle="None" 
         AllowsTransparency="True" 
-        Background="{DynamicResource Background}" 
-        WindowState="{Binding MainWindowState, Mode=TwoWay}"        >
+        WindowState="{Binding MainWindowState, Mode=TwoWay}" Background="{DynamicResource Background1}"        >
     <Window.DataContext>
         <Binding Path="MainScreen" Source="{StaticResource Locator}"/>
     </Window.DataContext>
@@ -25,19 +24,22 @@
         </Grid.RowDefinitions>
 
         <!--#region Content -->
-        <TabControl Grid.Row="1" Grid.Column="1" >
-            <TabItem Visibility="Collapsed">
-                <Frame x:Name="StudentFrame" Source="StudentScreenView.xaml" />
+        <TabControl Grid.Row="1" Grid.Column="1" BorderThickness="0" Background="{DynamicResource Background2}" >
+            <TabItem IsSelected="True" Visibility="Collapsed" Background="Transparent">
+                <Frame x:Name="StudentFrame" Source="StudentScreenView.xaml" Background="Transparent" />
+            </TabItem>
+            <TabItem Visibility="Collapsed" Background="Transparent">
+                <Frame x:Name="MenuFrame" Source="MenuView.xaml" Background="Transparent" />
             </TabItem>
         </TabControl>
         <!--#endregion-->
-        
+
         <!--#region LEFT MENU -->
         <usercontrols:NavigationBarView Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" MouseDown="Window_MouseDown" />
         <!--#endregion-->
 
         <!--#region TOP MENU -->
-        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource Background}" MouseDown="Window_MouseDown">
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource Background1}" MouseDown="Window_MouseDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="40" />

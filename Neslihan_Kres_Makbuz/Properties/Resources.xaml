@@ -4,18 +4,25 @@
 
     <clr:String x:Key="Version">2.0.0</clr:String>
 
-    <SolidColorBrush x:Key="Primary" Color="#BB86FC"/>
-    <SolidColorBrush x:Key="PrimaryVariant" Color="#3700B3"/>
-    <SolidColorBrush x:Key="Secondary" Color="#03DAC6"/>
-    <SolidColorBrush x:Key="Background" Color="#121212"/>
-    <SolidColorBrush x:Key="Surface" Color="#FF252525"/>
-    <SolidColorBrush x:Key="SurfaceVariant" Color="#FF343434"/>
+    <SolidColorBrush x:Key="Primary1" Color="#BB86FC"/>
+    <SolidColorBrush x:Key="Primary2" Color="#652EB2"/>
+    <SolidColorBrush x:Key="Secondary1" Color="#3700B3"/>
+    <SolidColorBrush x:Key="OnPrimary1" Color="#000000"/>
+    <SolidColorBrush x:Key="OnPrimary2" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="OnSecondary1" Color="#FFFFFF"/>
+
+    <SolidColorBrush x:Key="Background1" Color="#121212"/>
+    <SolidColorBrush x:Key="Background2" Color="#FF252525"/>
+    <SolidColorBrush x:Key="Background3" Color="#FF343434"/>
+    <SolidColorBrush x:Key="Background4" Color="#FF555555"/>
+    <SolidColorBrush x:Key="OnBackground1" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="OnBackground2" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="OnBackground3" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="OnBackground4" Color="#FFFFFF"/>
+    
     <SolidColorBrush x:Key="Error" Color="#CF6679"/>
-    <SolidColorBrush x:Key="OnPrimary" Color="#000000"/>
-    <SolidColorBrush x:Key="OnSecondary" Color="#000000"/>
-    <SolidColorBrush x:Key="OnBackground" Color="#FFFFFF"/>
-    <SolidColorBrush x:Key="OnSurface" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="OnError" Color="#000000"/>
+
     <SolidColorBrush x:Key="Red" Color="#FFB20000"/>
     <SolidColorBrush x:Key="Gray" Color="#FFCBCBCB"/>
     <SolidColorBrush x:Key="DarkGray" Color="#FF747474"/>
@@ -23,8 +30,8 @@
     <FontFamily x:Key="MainFont">Verdana</FontFamily>
 
     <Style TargetType="Button" x:Key="WindowsButton">
-        <Setter Property="Background" Value="{StaticResource Background}" />
-        <Setter Property="Foreground" Value="{StaticResource OnBackground}" />
+        <Setter Property="Background" Value="{StaticResource Background1}" />
+        <Setter Property="Foreground" Value="{StaticResource OnBackground1}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontWeight" Value="DemiBold" />
@@ -58,17 +65,17 @@
     </Style>
 
     <Style TargetType="TextBlock" x:Key="SmallText">
-        <Setter Property="Foreground" Value="{StaticResource OnBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource OnBackground1}" />
         <Setter Property="Background" Value="{x:Null}" />
         <Setter Property="FontFamily" Value="{StaticResource MainFont}" />
         <Setter Property="FontSize" Value="10" />
     </Style>
 
     <Style TargetType="{x:Type Button}">
-        <Setter Property="Margin" Value="10"/>
-        <Setter Property="Foreground" Value="{StaticResource OnPrimary}"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Background" Value="{DynamicResource Primary}"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Foreground" Value="{StaticResource OnPrimary1}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Background" Value="{DynamicResource Primary1}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -80,10 +87,11 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource Secondary}"/>
+                <Setter Property="Background" Value="{StaticResource Primary2}"/>
             </Trigger>
             <Trigger Property="Button.IsPressed" Value="True">
-                <Setter Property="Background" Value="{StaticResource Gray}"/>
+                <Setter Property="Background" Value="{StaticResource Secondary1}"/>
+                <Setter Property="Foreground" Value="{StaticResource OnSecondary1}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -151,6 +159,33 @@
                             <Setter TargetName="PageUp" Property="Command" Value="ScrollBar.PageRightCommand" />
                         </Trigger>
                     </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="{x:Type TabControl}" TargetType="{x:Type TabControl}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="Red"/>
+        <Setter Property="Background" Value="LightBlue"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabControl">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border BorderThickness="0 0 1 1" BorderBrush="#484848" Grid.Row="1">
+                            <Border BorderThickness="{TemplateBinding BorderThickness}" 
+                                    BorderBrush="{TemplateBinding BorderBrush}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter ContentSource="SelectedContent"/>
+                                </Border>
+                            </Border>
+                        </Border>
+                        <TabPanel Grid.Row="0" IsItemsHost="true"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

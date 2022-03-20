@@ -35,6 +35,13 @@ namespace Neslihan_Kres_Makbuz.ViewModel
                     SelectedStudent = newStudent.SelectedStudent;
                 }
             });
+
+            DoubleClickCommand = new RelayCommand<object>(DoubleClickCommandMethod);
+        }
+
+        private void DoubleClickCommandMethod(object obj)
+        {
+            SelectedStudent.Selected = !SelectedStudent.Selected;
         }
 
         private ObservableCollection<Student> _students;
@@ -42,6 +49,8 @@ namespace Neslihan_Kres_Makbuz.ViewModel
 
         private ObservableCollection<Receipt> _receipts;
         private Receipt _selectedReceipt;
+
+        public ICommand DoubleClickCommand { get; private set; }
 
         public ObservableCollection<Student> Students
         {

@@ -6,37 +6,38 @@
              xmlns:local="clr-namespace:Neslihan_Kres_Makbuz.View"
              xmlns:Converter="clr-namespace:Neslihan_Kres_Makbuz.Converter" x:Class="Neslihan_Kres_Makbuz.View.StudentDetailsView"
              mc:Ignorable="d" 
+             BorderThickness="1"
              >
     <UserControl.Resources>
         <Converter:StudentClassConverter x:Key="StudentClassConverter"/>
         <Converter:StudentStatusConverter x:Key="StudentStatusConverter"/>
         <Style x:Key="HeaderTextBox" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{StaticResource OnSurface}" />
+            <Setter Property="Foreground" Value="{StaticResource OnBackground3}" />
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
         <Style x:Key="ValueTextBox" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{StaticResource OnSurface}" />
+            <Setter Property="Foreground" Value="{StaticResource OnBackground3}" />
             <Setter Property="FontSize" Value="14" />
             <Setter Property="TextWrapping" Value="Wrap" />
         </Style>
         <Style x:Key="HeaderName" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{StaticResource OnSurface}" />
+            <Setter Property="Foreground" Value="{StaticResource OnBackground3}" />
             <Setter Property="FontSize" Value="32" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
         <Style x:Key="ReceipsTextBox" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{StaticResource OnSurface}" />
+            <Setter Property="Foreground" Value="{StaticResource OnBackground3}" />
             <Setter Property="FontSize" Value="18" />
             <Setter Property="FontWeight" Value="Bold" />
         </Style>
     </UserControl.Resources>
-    <UserControl.Background>
-        <StaticResource ResourceKey="SurfaceVariant"/>
-    </UserControl.Background>
     <UserControl.DataContext>
         <Binding Path="StudentDetails" Source="{StaticResource Locator}"/>
     </UserControl.DataContext>
+    <UserControl.Background>
+        <StaticResource ResourceKey="Background3"/>
+    </UserControl.Background>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -68,8 +69,8 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="6" >
             <TextBlock Text="{Binding Student.Name}" Style="{DynamicResource HeaderName}"  />
-            <Border CornerRadius="10" BorderThickness="1" Background="{StaticResource Secondary}" Height="30" Margin="10 0 0 0" >
-                <Label Content="{Binding Student.Status, Converter={StaticResource StudentStatusConverter}}" VerticalAlignment="Center" Foreground="{StaticResource OnSecondary}" />
+            <Border CornerRadius="10" BorderThickness="1" Background="{StaticResource Primary1}" Height="30" Margin="10 0 0 0" >
+                <Label Content="{Binding Student.Status, Converter={StaticResource StudentStatusConverter}}" VerticalAlignment="Center" Foreground="{StaticResource OnPrimary2}" />
             </Border>
         </StackPanel>
 
@@ -91,8 +92,8 @@
         <TextBlock Grid.Row="5" Grid.Column="4" Text="Program" Style="{DynamicResource HeaderTextBox}"  />
         <TextBlock Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="5" Text="{Binding Student.ProgramDesc}" Style="{DynamicResource ValueTextBox}"  />
 
-        <TextBlock Grid.Row="7" Grid.Column="5" Grid.ColumnSpan="3" Text="Makbuzlar" HorizontalAlignment="Center" Style="{DynamicResource ReceipsTextBox}"/>
-        <DataGrid Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="5" Height="240"
+        <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="10" Text="Makbuzlar" HorizontalAlignment="Center" Style="{DynamicResource ReceipsTextBox}"/>
+        <DataGrid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="10" Height="240"
                   ItemsSource="{Binding Student.Receipts}"
                   SelectionMode="Extended"
                   AutoGenerateColumns="False"
@@ -100,22 +101,22 @@
                   KeyboardNavigation.ControlTabNavigation="None"
                   EnableColumnVirtualization="True"                
                   EnableRowVirtualization="True" 
-                  Background="Transparent"
+                  Background="{StaticResource Background4}"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
                   CanUserResizeRows="False"
                   IsReadOnly="True"
                   BorderBrush="Transparent"
-                  HorizontalAlignment="Stretch" 
-                  HorizontalContentAlignment="Stretch" 
+                  HorizontalAlignment="Center" 
+                  HorizontalContentAlignment="Center" 
                   ColumnWidth="Auto"
+                  GridLinesVisibility="None"
                   Width="385"
             >
             <DataGrid.Resources>
                 <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
                     <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="Foreground" Value="{StaticResource OnSurface}" />
-                    <Setter Property="BorderBrush" Value="{StaticResource Surface}"/>
+                    <Setter Property="Foreground" Value="{StaticResource OnBackground4}" />
                     <Setter Property="BorderThickness" Value="0"/>
                     <Setter Property="Height" Value="30" />
                     <Setter Property="Width" Value="auto"/>
@@ -127,22 +128,21 @@
             </DataGrid.Resources>
             <DataGrid.CellStyle>
                 <Style TargetType="{x:Type DataGridCell}">
-                    <Setter Property="Foreground" Value="{StaticResource OnSurface}" />
+                    <Setter Property="Foreground" Value="{StaticResource OnBackground4}" />
                     <Setter Property="VerticalAlignment" Value="Center" />
                     <Setter Property="Height" Value="32" />
-                    <Setter Property="BorderBrush" Value="{x:Null}" />
+                    <Setter Property="BorderThickness" Value="0" />
                     <Setter Property="HorizontalAlignment" Value="Center"/>
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    <Setter Property="VerticalAlignment" Value="Center"/>
-                    <Setter Property="VerticalContentAlignment" Value="Center"/>
                 </Style>
             </DataGrid.CellStyle>
             <DataGrid.RowStyle>
                 <Style TargetType="{x:Type DataGridRow}">
-                    <Setter Property="Background" Value="{StaticResource SurfaceVariant}"/>
-                    <Setter Property="Foreground" Value="{StaticResource OnSurface}"/>
+                    <Setter Property="Background" Value="{StaticResource Background4}"/>
+                    <Setter Property="Foreground" Value="{StaticResource OnBackground3}"/>
                     <Setter Property="Margin" Value="5"/>
                     <Setter Property="Height" Value="32"/>
+                    <Setter Property="BorderThickness" Value="0"/>
                 </Style>
             </DataGrid.RowStyle>
             <DataGrid.Columns>
@@ -153,14 +153,11 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Grid Grid.Row="10" Grid.ColumnSpan="20" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Content="Kapat" Command="{Binding CloseStudentDetailCommand}" />
-            <Button Grid.Column="1" Content="Düzenle" />
+        <Grid Grid.Row="10" Grid.ColumnSpan="20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                <Button Grid.Column="0" Width="240" Content="Kapat" Command="{Binding CloseStudentDetailCommand}" />
+                <Button Grid.Column="1" Width="240" Content="Düzenle" />
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>
