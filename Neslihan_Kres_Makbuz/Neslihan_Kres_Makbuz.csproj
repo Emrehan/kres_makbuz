@@ -142,6 +142,7 @@
     <Compile Include="Converter\CheckNullToVisibilityConverter.cs" />
     <Compile Include="Converter\ChosenStudentConverter.cs" />
     <Compile Include="Converter\StudentClassConverter.cs" />
+    <Compile Include="Converter\IntToVisibilityConverter.cs" />
     <Compile Include="Converter\StudentStatusConverter.cs" />
     <Compile Include="Converter\StudentFilterToBoolConverter.cs" />
     <Compile Include="Message\SelectedStudentChangedMessage.cs" />

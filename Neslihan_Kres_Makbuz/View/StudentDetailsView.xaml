@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<UserControl 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,6 +11,8 @@
     <UserControl.Resources>
         <Converter:StudentClassConverter x:Key="StudentClassConverter"/>
         <Converter:StudentStatusConverter x:Key="StudentStatusConverter"/>
+        <Converter:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
+        
         <Style x:Key="HeaderTextBox" TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="{StaticResource OnBackground3}" />
             <Setter Property="FontSize" Value="14" />
@@ -92,66 +94,79 @@
         <TextBlock Grid.Row="5" Grid.Column="4" Text="Program" Style="{DynamicResource HeaderTextBox}"  />
         <TextBlock Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="5" Text="{Binding Student.ProgramDesc}" Style="{DynamicResource ValueTextBox}"  />
 
-        <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="10" Text="Makbuzlar" HorizontalAlignment="Center" Style="{DynamicResource ReceipsTextBox}"/>
-        <DataGrid Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="10" Height="240"
+        <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="10" 
+                   Text="Makbuzlar" 
+                   HorizontalAlignment="Center" 
+                   Style="{DynamicResource ReceipsTextBox}"/>
+        <Border 
+            Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="10" Width="400" 
+            CornerRadius="10" 
+            Background="{StaticResource Background4}" >
+            <DataGrid 
                   ItemsSource="{Binding Student.Receipts}"
-                  SelectionMode="Extended"
+                  SelectionMode="Single"
                   AutoGenerateColumns="False"
                   HeadersVisibility="Column"
                   KeyboardNavigation.ControlTabNavigation="None"
-                  EnableColumnVirtualization="True"                
+                  EnableColumnVirtualization="True"    
+                  Background="Transparent"
                   EnableRowVirtualization="True" 
-                  Background="{StaticResource Background4}"
                   CanUserAddRows="False"
                   CanUserDeleteRows="False"
                   CanUserResizeRows="False"
                   IsReadOnly="True"
+                  Margin="5"
                   BorderBrush="Transparent"
                   HorizontalAlignment="Center" 
                   HorizontalContentAlignment="Center" 
                   ColumnWidth="Auto"
                   GridLinesVisibility="None"
-                  Width="385"
-            >
-            <DataGrid.Resources>
-                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="Foreground" Value="{StaticResource OnBackground4}" />
-                    <Setter Property="BorderThickness" Value="0"/>
-                    <Setter Property="Height" Value="30" />
-                    <Setter Property="Width" Value="auto"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                    <Setter Property="FontWeight" Value="Bold"/>
-                    <Setter Property="FontStretch" Value="Expanded"/>
-                    <Setter Property="FontSize" Value="14"/>
-                </Style>
-            </DataGrid.Resources>
-            <DataGrid.CellStyle>
-                <Style TargetType="{x:Type DataGridCell}">
-                    <Setter Property="Foreground" Value="{StaticResource OnBackground4}" />
-                    <Setter Property="VerticalAlignment" Value="Center" />
-                    <Setter Property="Height" Value="32" />
-                    <Setter Property="BorderThickness" Value="0" />
-                    <Setter Property="HorizontalAlignment" Value="Center"/>
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                </Style>
-            </DataGrid.CellStyle>
-            <DataGrid.RowStyle>
-                <Style TargetType="{x:Type DataGridRow}">
-                    <Setter Property="Background" Value="{StaticResource Background4}"/>
-                    <Setter Property="Foreground" Value="{StaticResource OnBackground3}"/>
-                    <Setter Property="Margin" Value="5"/>
-                    <Setter Property="Height" Value="32"/>
-                    <Setter Property="BorderThickness" Value="0"/>
-                </Style>
-            </DataGrid.RowStyle>
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Tarih" Binding="{Binding CreateDate, StringFormat=dd/MM/yyyy}" Width="120" />
-                <DataGridTextColumn Header="Ücret" Binding="{Binding Student.Fee, StringFormat=₺ {0}}" Width="80" />
-                <DataGridTextColumn Header="KDVsiz" Binding="{Binding Student.Fee_wo_kdv, StringFormat=₺ {0}}" Width="80" />
-                <DataGridTextColumn Header="KDV" Binding="{Binding Student.CutedKDV, StringFormat=₺ {0}}" Width="80" />
-            </DataGrid.Columns>
-        </DataGrid>
+                  
+                >
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}" >
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Foreground" Value="{StaticResource OnBackground4}" />
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Height" Value="30" />
+                        <Setter Property="Width" Value="auto"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="FontStretch" Value="Expanded"/>
+                        <Setter Property="FontSize" Value="14"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Visibility>
+                    <Binding Converter="{StaticResource IntToVisibilityConverter}" Mode="OneWay" Path="Student.Receipts.Count"/>
+                </DataGrid.Visibility>
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Setter Property="Foreground" Value="{StaticResource OnBackground4}" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                        <Setter Property="Height" Value="32" />
+                        <Setter Property="BorderThickness" Value="0" />
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.RowStyle>
+                    <Style TargetType="{x:Type DataGridRow}">
+                        <Setter Property="Background" Value="{StaticResource Background4}"/>
+                        <Setter Property="Foreground" Value="{StaticResource OnBackground3}"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="Height" Value="32"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tarih" Binding="{Binding CreateDate, StringFormat=dd/MM/yyyy}" Width="120" />
+                    <DataGridTextColumn Header="Ücret" Binding="{Binding Student.Fee, StringFormat=₺ {0}}" Width="80" />
+                    <DataGridTextColumn Header="KDVsiz" Binding="{Binding Student.Fee_wo_kdv, StringFormat=₺ {0}}" Width="80" />
+                    <DataGridTextColumn Header="KDV" Binding="{Binding Student.CutedKDV, StringFormat=₺ {0}}" Width="80" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
 
         <Grid Grid.Row="10" Grid.ColumnSpan="20">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">

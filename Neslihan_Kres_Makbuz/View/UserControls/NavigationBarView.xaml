@@ -27,6 +27,6 @@
             <view:TabButtonView />
         </StackPanel>
 
-        <TextBlock Grid.Row="3" Text="{DynamicResource Version}" Style="{DynamicResource SmallText}" />
+        <TextBlock Grid.Row="3" Margin="10" Text="{DynamicResource Version}" Style="{DynamicResource SmallText}" />
     </Grid>
 </UserControl>

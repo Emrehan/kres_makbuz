@@ -18,8 +18,8 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         public StudentScreenViewModel()
         {
             Students = new ObservableCollection<Student>(Student.FakeData.Generate(50).ToArray());
-            Receipts = new ObservableCollection<Receipt>(Receipt.FakeData.Generate(6000).ToArray());
-
+            Receipts = new ObservableCollection<Receipt>(Receipt.FakeData.Generate(120).ToArray());
+            
             Random rn = new Random();
             foreach (var r in Receipts)
             {
