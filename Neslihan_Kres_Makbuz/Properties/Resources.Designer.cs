@@ -63,16 +63,6 @@ namespace Neslihan_Kres_Makbuz.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap edit {
-            get {
-                object obj = ResourceManager.GetObject("edit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap kid_photo {
             get {
                 object obj = ResourceManager.GetObject("kid_photo", resourceCulture);
@@ -83,29 +73,9 @@ namespace Neslihan_Kres_Makbuz.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap menu1 {
-            get {
-                object obj = ResourceManager.GetObject("menu1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap neslihan_icon {
             get {
                 object obj = ResourceManager.GetObject("neslihan_icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap roundTile {
-            get {
-                object obj = ResourceManager.GetObject("roundTile", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

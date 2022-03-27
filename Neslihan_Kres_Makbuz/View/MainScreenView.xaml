@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Neslihan_Kres_Makbuz.View" xmlns:viewmodel="clr-namespace:Neslihan_Kres_Makbuz.ViewModel" xmlns:svg="clr-namespace:Neslihan_Kres_Makbuz.Resources.SVG" xmlns:usercontrols="clr-namespace:Neslihan_Kres_Makbuz.View.UserControls"
+        xmlns:usercontrols="clr-namespace:Neslihan_Kres_Makbuz.View.UserControls"
         mc:Ignorable="d" 
         
         Height="720" Width="1080" 
