@@ -1,5 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using Neslihan_Kres_Makbuz.Config;
+using Neslihan_Kres_Makbuz.Message;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +17,16 @@ namespace Neslihan_Kres_Makbuz.ViewModel
     {
         public MainScreenViewModel()
         {
+            #region Commands
             CloseApplicationCommand = new RelayCommand(CloseApplicationMethod);
             MinimizeApplicationCommand = new RelayCommand(MinimizeApplicationMethod);
-            MaximizeApplicationCommand = new RelayCommand(MaximizeApplicationMethod);
+            MaximizeApplicationCommand = new RelayCommand(MaximizeApplicationMethod); 
+            #endregion
+
+            #region Messages
+            Messenger.Default.Register<SelectedMenuChangedMessage>(this, 
+                (SelectedMenuChangedMessage newMessage) => { SelectedMenuType = newMessage.SelectedMenu; });
+            #endregion
         }
 
         WindowState _mainWindowState;
@@ -29,6 +39,19 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             set
             {
                 Set<WindowState>(() => this.MainWindowState, ref _mainWindowState, value);
+            }
+        }
+
+        private TAB_ITEM _selectedMenuType = TAB_ITEM.STUDENTS;
+        public TAB_ITEM SelectedMenuType
+        {
+            get
+            {
+                return _selectedMenuType;
+            }
+            set
+            {
+                Set<TAB_ITEM>(() => this.SelectedMenuType, ref _selectedMenuType, value);
             }
         }
 

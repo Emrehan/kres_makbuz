@@ -1,15 +1,20 @@
-﻿<Window x:Class="Neslihan_Kres_Makbuz.View.MainScreenView"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:usercontrols="clr-namespace:Neslihan_Kres_Makbuz.View.UserControls"
+        xmlns:tabItemType="clr-namespace:Neslihan_Kres_Makbuz.Config"
+        xmlns:Converter="clr-namespace:Neslihan_Kres_Makbuz.Converter" x:Class="Neslihan_Kres_Makbuz.View.MainScreenView"
         mc:Ignorable="d" 
         
         Height="720" Width="1080" 
         WindowStyle="None" 
         AllowsTransparency="True" 
         WindowState="{Binding MainWindowState, Mode=TwoWay}" Background="{DynamicResource Background1}"        >
+    <Window.Resources>
+        <Converter:MenuTypeToSelectedBoolConverter x:Key="MenuTypeToSelectedBoolConverter"/>
+    </Window.Resources>
     <Window.DataContext>
         <Binding Path="MainScreen" Source="{StaticResource Locator}"/>
     </Window.DataContext>
@@ -25,11 +30,19 @@
 
         <!--#region Content -->
         <TabControl Grid.Row="1" Grid.Column="1" BorderThickness="0" Background="{DynamicResource Background2}" >
-            <TabItem IsSelected="True" Visibility="Collapsed" Background="Transparent">
+            <TabItem IsSelected="{Binding   Path=SelectedMenuType, 
+                                            Converter={StaticResource MenuTypeToSelectedBoolConverter}, 
+                                            ConverterParameter={x:Static tabItemType:TAB_ITEM.STUDENTS},
+                                            Mode=OneWay}" 
+                     Visibility="Collapsed" Background="Transparent">
                 <Frame x:Name="StudentFrame" Source="StudentScreenView.xaml" Background="Transparent" />
             </TabItem>
-            <TabItem Visibility="Collapsed" Background="Transparent">
-                <Frame x:Name="MenuFrame" Source="MenuView.xaml" Background="Transparent" />
+            <TabItem IsSelected="{Binding   Path=SelectedMenuType, 
+                                            Converter={StaticResource MenuTypeToSelectedBoolConverter}, 
+                                            ConverterParameter={x:Static tabItemType:TAB_ITEM.MENU},
+                                            Mode=OneWay}" 
+                     Visibility="Collapsed" Background="Transparent">
+                <Frame x:Name="MenuFrame" Source="FoodMenuView.xaml" Background="Transparent" />
             </TabItem>
         </TabControl>
         <!--#endregion-->

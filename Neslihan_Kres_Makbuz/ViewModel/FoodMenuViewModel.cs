@@ -12,9 +12,9 @@ using Neslihan_Kres_Makbuz.Message;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
 {
-    public class MenuViewModel : ViewModelBase
+    public class FoodMenuViewModel : ViewModelBase
     {
-        public MenuViewModel()
+        public FoodMenuViewModel()
         {
 
         }

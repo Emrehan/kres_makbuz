@@ -33,14 +33,13 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<MainScreenViewModel>();
             SimpleIoc.Default.Register<StudentEditWindowViewModel>();
             SimpleIoc.Default.Register<StudentScreenViewModel>(true);
             SimpleIoc.Default.Register<StudentDetailsViewModel>(true);
             SimpleIoc.Default.Register<TabButtonViewModel>();
             SimpleIoc.Default.Register<NavigationBarViewModel>();
-            SimpleIoc.Default.Register<MenuViewModel>();
+            SimpleIoc.Default.Register<FoodMenuViewModel>();
         }
 
         public MainScreenViewModel MainScreen
@@ -48,14 +47,6 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<MainScreenViewModel>();
-            }
-        }
-
-        public MainViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
 
@@ -100,11 +91,11 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             }
         }
 
-        public MenuViewModel Menu
+        public FoodMenuViewModel FoodMenu
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<MenuViewModel>();
+                return ServiceLocator.Current.GetInstance<FoodMenuViewModel>();
             }
         }
 

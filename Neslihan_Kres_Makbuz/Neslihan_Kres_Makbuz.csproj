@@ -38,6 +38,9 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>neslihan_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bogus, Version=33.1.1.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
       <HintPath>..\packages\Bogus.33.1.1\lib\net40\Bogus.dll</HintPath>
@@ -141,6 +144,8 @@
     <Compile Include="Config\Globals.cs" />
     <Compile Include="Converter\CheckNullToVisibilityConverter.cs" />
     <Compile Include="Converter\ChosenStudentConverter.cs" />
+    <Compile Include="Converter\MenuTypeToSelectedBoolConverter.cs" />
+    <Compile Include="Converter\TabTypeToStringConverter.cs" />
     <Compile Include="Converter\StudentClassConverter.cs" />
     <Compile Include="Converter\IntToVisibilityConverter.cs" />
     <Compile Include="Converter\StudentStatusConverter.cs" />
@@ -154,14 +159,13 @@
     </Compile>
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
     <Compile Include="ViewModel\NavigationBarViewModel.cs" />
-    <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="ViewModel\FoodMenuViewModel.cs" />
     <Compile Include="ViewModel\TabButtonViewModel.cs" />
     <Compile Include="Message\SelectedMenuChangedMessage.cs" />
     <Compile Include="ViewModel\StudentDetailsViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\StudentScreenViewModel.cs" />
-    <Compile Include="View\MenuView.xaml.cs">
-      <DependentUpon>MenuView.xaml</DependentUpon>
+    <Compile Include="View\FoodMenuView.xaml.cs">
+      <DependentUpon>FoodMenuView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\StudentDetailsView.xaml.cs">
       <DependentUpon>StudentDetailsView.xaml</DependentUpon>
@@ -191,7 +195,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MenuView.xaml">
+    <Page Include="View\FoodMenuView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,17 +258,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\edit.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Documents\AwesomeFeatures.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\menu.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\neslihan_icon.png">
@@ -280,9 +274,10 @@
     <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\roundTile.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    <None Include="Resources\neslihan_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="neslihan_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

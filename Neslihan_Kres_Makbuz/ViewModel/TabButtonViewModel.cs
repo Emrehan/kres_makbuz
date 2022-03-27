@@ -14,24 +14,13 @@ namespace Neslihan_Kres_Makbuz.ViewModel
 {
     public class TabButtonViewModel : ViewModelBase
     {
-        private TAB_ITEM _menu;
 
         public TabButtonViewModel(TAB_ITEM menu)
         {
-            _menu = menu;
-            switch (_menu)
-            {
-                case TAB_ITEM.STUDENTS:
-                    TabName = "Öðrenciler";
-                    IsSelected = true;
-                    break;
-                case TAB_ITEM.MENU:
-                    TabName = "Yemek Menüsü";
-                    break;
-                default:
-                    TabName = "???WTF???";
-                    break;
-            }
+            TabType = menu;
+
+            if (TabType == TAB_ITEM.STUDENTS)
+                IsSelected = true;
 
             MouseClickCommand = new RelayCommand(MouseClickMethod);
 
@@ -41,13 +30,13 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         public ICommand MouseClickCommand { get; private set; }
         public void MouseClickMethod()
         {
-            Messenger.Default.Send(new SelectedMenuChangedMessage(_menu));
+            Messenger.Default.Send(new SelectedMenuChangedMessage(_tabType));
         }
 
 
         private void SelectedMenuChangedMethod(SelectedMenuChangedMessage obj)
         {
-            IsSelected = obj.SelectedMenu == _menu;
+            IsSelected = obj.SelectedMenu == _tabType;
         }
 
         private bool _isSelected;
@@ -60,13 +49,13 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             }
         }
 
-        private string _tabName;
-        public string TabName
+        private TAB_ITEM _tabType;
+        public TAB_ITEM TabType
         {
-            get => _tabName;
+            get => _tabType;
             set
             {
-                Set<string>(() => this.TabName, ref _tabName, value);
+                Set<TAB_ITEM>(() => this.TabType, ref _tabType, value);
             }
         }
     }

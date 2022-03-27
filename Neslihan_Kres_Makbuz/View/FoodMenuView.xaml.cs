@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Neslihan_Kres_Makbuz.View
 {
     /// <summary>
-    /// Interaction logic for MenuView.xaml
+    /// Interaction logic for FoodMenuView.xaml
     /// </summary>
-    public partial class MenuView : UserControl
+    public partial class FoodMenuView : UserControl
     {
-        public MenuView()
+        public FoodMenuView()
         {
             InitializeComponent();
         }
