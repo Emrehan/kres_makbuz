@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Neslihan_Kres_Makbuz.View.StudentEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Neslihan_Kres_Makbuz.View"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <Binding Path="StudentEdit" Source="{StaticResource Locator}"/>
+    </UserControl.DataContext>
+    <StackPanel Orientation="Vertical">
+        <Button Content="Geri" Command="{Binding CloseStudentDetailCommand}" />
+        <TextBox Text="{Binding Student.Name}" />
+        <TextBox Text="{Binding Student.ID}" />
+    </StackPanel>
+</UserControl>

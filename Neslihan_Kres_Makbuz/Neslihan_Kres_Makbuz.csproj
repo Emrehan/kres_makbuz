@@ -160,6 +160,7 @@
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
     <Compile Include="ViewModel\NavigationBarViewModel.cs" />
     <Compile Include="ViewModel\FoodMenuViewModel.cs" />
+    <Compile Include="ViewModel\StudentEditViewModel.cs" />
     <Compile Include="ViewModel\TabButtonViewModel.cs" />
     <Compile Include="Message\SelectedMenuChangedMessage.cs" />
     <Compile Include="ViewModel\StudentDetailsViewModel.cs" />
@@ -170,19 +171,18 @@
     <Compile Include="View\StudentDetailsView.xaml.cs">
       <DependentUpon>StudentDetailsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\StudentEditView.xaml.cs">
+      <DependentUpon>StudentEditView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StudentScreenView.xaml.cs">
       <DependentUpon>StudentScreenView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\TabButtonView.xaml.cs">
       <DependentUpon>TabButtonView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\StudentEditWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\MainScreenView.xaml.cs">
       <DependentUpon>MainScreenView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\StudentEditWindow.xaml.cs">
-      <DependentUpon>StudentEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UserControls\NavigationBarView.xaml.cs">
       <DependentUpon>NavigationBarView.xaml</DependentUpon>
@@ -200,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\StudentDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StudentEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,10 +225,6 @@
     </Compile>
     <Compile Include="Config\DatabaseConfig.cs" />
     <Compile Include="Config\DatabaseConfig.temp.cs" />
-    <Page Include="View\StudentEditWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\UserControls\NavigationBarView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Neslihan_Kres_Makbuz.View"
-             xmlns:Converter="clr-namespace:Neslihan_Kres_Makbuz.Converter" x:Class="Neslihan_Kres_Makbuz.View.StudentDetailsView"
+             xmlns:Converter="clr-namespace:Neslihan_Kres_Makbuz.Converter" 
+             x:Class="Neslihan_Kres_Makbuz.View.StudentDetailsView"
              mc:Ignorable="d" 
              BorderThickness="1"
              >
