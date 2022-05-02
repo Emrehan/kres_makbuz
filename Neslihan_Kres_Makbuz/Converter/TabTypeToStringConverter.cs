@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using Neslihan_Kres_Makbuz.Config;
+using Neslihan_Kres_Makbuz.Service;
 
 namespace Neslihan_Kres_Makbuz.Converter
 {
@@ -17,12 +18,12 @@ namespace Neslihan_Kres_Makbuz.Converter
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null) return "Null";
-            if (value.GetType() != typeof(TAB_ITEM)) return "Wrong Type";
+            if (value.GetType() != typeof(NavigationPage)) return "Wrong Type";
 
-            switch ((TAB_ITEM)value)
+            switch ((NavigationPage)value)
             {
-                case TAB_ITEM.STUDENTS: return "Öğrenciler";
-                case TAB_ITEM.MENU: return "Yemek Listesi";
+                case NavigationPage.STUDENT_LIST: return "Öğrenciler";
+                case NavigationPage.FOOD_MUNU: return "Yemek Listesi";
                 default: return "Default";
             }
         }

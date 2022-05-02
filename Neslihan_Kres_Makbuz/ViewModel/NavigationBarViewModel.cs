@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using Neslihan_Kres_Makbuz.Converter;
 using Neslihan_Kres_Makbuz.Message;
+using Neslihan_Kres_Makbuz.Service;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
 {
@@ -16,7 +17,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
     {
         public NavigationBarViewModel()
         {
-            
+
         }
 
         private string _version = "2.0.0";

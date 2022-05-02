@@ -9,34 +9,38 @@ using System;
 using System.Linq;
 using Neslihan_Kres_Makbuz.Converter;
 using Neslihan_Kres_Makbuz.Message;
+using Neslihan_Kres_Makbuz.Service;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
 {
     public class TabButtonViewModel : ViewModelBase
     {
+        private static int _menuId = 0;
 
-        public TabButtonViewModel(TAB_ITEM menu)
+        IFrameNavigationService _navigationService;
+
+        public TabButtonViewModel(IFrameNavigationService navigationService)
         {
-            TabType = menu;
-
-            if (TabType == TAB_ITEM.STUDENTS)
+            TabType = (NavigationPage)(_menuId++);
+            Console.WriteLine(TabType.ToString());
+            if (TabType == NavigationPage.STUDENT_LIST)
                 IsSelected = true;
 
-            MouseClickCommand = new RelayCommand(MouseClickMethod);
+            _navigationService = navigationService;
 
-            Messenger.Default.Register<SelectedMenuChangedMessage>(this, SelectedMenuChangedMethod);
+            MouseClickCommand = new RelayCommand(MouseClickMethod);
+            _navigationService.PageChanged += _navigationService_PageChanged;
+        }
+
+        private void _navigationService_PageChanged(NavigationPage page)
+        {
+            IsSelected = page == _tabType;
         }
 
         public ICommand MouseClickCommand { get; private set; }
         public void MouseClickMethod()
         {
-            Messenger.Default.Send(new SelectedMenuChangedMessage(_tabType));
-        }
-
-
-        private void SelectedMenuChangedMethod(SelectedMenuChangedMessage obj)
-        {
-            IsSelected = obj.SelectedMenu == _tabType;
+            _navigationService.NavigateTo(TabType.ToString());
         }
 
         private bool _isSelected;
@@ -49,13 +53,13 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             }
         }
 
-        private TAB_ITEM _tabType;
-        public TAB_ITEM TabType
+        private NavigationPage _tabType;
+        public NavigationPage TabType
         {
             get => _tabType;
             set
             {
-                Set<TAB_ITEM>(() => this.TabType, ref _tabType, value);
+                Set<NavigationPage>(() => this.TabType, ref _tabType, value);
             }
         }
     }

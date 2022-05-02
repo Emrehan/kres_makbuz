@@ -16,6 +16,8 @@ using CommonServiceLocator;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using Neslihan_Kres_Makbuz.Config;
+using Neslihan_Kres_Makbuz.Service;
+using System;
 using System.Windows;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
@@ -40,6 +42,17 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             SimpleIoc.Default.Register<TabButtonViewModel>();
             SimpleIoc.Default.Register<NavigationBarViewModel>();
             SimpleIoc.Default.Register<FoodMenuViewModel>();
+
+            SetupNavigation();
+        }
+
+        private static void SetupNavigation()
+        {
+            var navigationService = new FrameNavigationService();
+            navigationService.Configure(NavigationPage.STUDENT_LIST.ToString(), new Uri("../View/StudentScreenView.xaml", UriKind.Relative));
+            navigationService.Configure(NavigationPage.FOOD_MUNU.ToString(), new Uri("../View/FoodMenuView.xaml", UriKind.Relative));            
+
+            SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
 
         public MainScreenViewModel MainScreen
@@ -74,12 +87,12 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             }
         }
 
-        private static int _tabIndex = 0;
+        private static int _menuID = 0;
         public TabButtonViewModel TabButton
         {
             get
             {
-                return new TabButtonViewModel((TAB_ITEM)_tabIndex++);
+                return ServiceLocator.Current.GetInstance<TabButtonViewModel>((_menuID++).ToString());
             }
         }
 

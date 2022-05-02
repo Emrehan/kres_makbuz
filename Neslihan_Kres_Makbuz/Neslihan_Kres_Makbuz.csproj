@@ -144,7 +144,6 @@
     <Compile Include="Config\Globals.cs" />
     <Compile Include="Converter\CheckNullToVisibilityConverter.cs" />
     <Compile Include="Converter\ChosenStudentConverter.cs" />
-    <Compile Include="Converter\MenuTypeToSelectedBoolConverter.cs" />
     <Compile Include="Converter\TabTypeToStringConverter.cs" />
     <Compile Include="Converter\StudentClassConverter.cs" />
     <Compile Include="Converter\IntToVisibilityConverter.cs" />
@@ -157,12 +156,13 @@
     <Compile Include="Resources\SVG\NeslihanIcon.xaml.cs">
       <DependentUpon>NeslihanIcon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Service\FrameNavigationService.cs" />
+    <Compile Include="Service\IFrameNavigationService.cs" />
     <Compile Include="ViewModel\MainScreenViewModel.cs" />
     <Compile Include="ViewModel\NavigationBarViewModel.cs" />
     <Compile Include="ViewModel\FoodMenuViewModel.cs" />
     <Compile Include="ViewModel\StudentEditViewModel.cs" />
     <Compile Include="ViewModel\TabButtonViewModel.cs" />
-    <Compile Include="Message\SelectedMenuChangedMessage.cs" />
     <Compile Include="ViewModel\StudentDetailsViewModel.cs" />
     <Compile Include="ViewModel\StudentScreenViewModel.cs" />
     <Compile Include="View\FoodMenuView.xaml.cs">
@@ -270,9 +270,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Service\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\neslihan_icon.ico" />
   </ItemGroup>

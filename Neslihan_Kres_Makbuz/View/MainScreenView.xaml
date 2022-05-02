@@ -5,19 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:usercontrols="clr-namespace:Neslihan_Kres_Makbuz.View.UserControls"
         xmlns:tabItemType="clr-namespace:Neslihan_Kres_Makbuz.Config"
-        xmlns:Converter="clr-namespace:Neslihan_Kres_Makbuz.Converter" x:Class="Neslihan_Kres_Makbuz.View.MainScreenView"
+        xmlns:Converter="clr-namespace:Neslihan_Kres_Makbuz.Converter" xmlns:local="clr-namespace:Neslihan_Kres_Makbuz.View" x:Class="Neslihan_Kres_Makbuz.View.MainScreenView"
         mc:Ignorable="d" 
         
         Height="720" Width="1080" 
         WindowStyle="None" 
         AllowsTransparency="True" 
-        WindowState="{Binding MainWindowState, Mode=TwoWay}" Background="{DynamicResource Background1}"        >
-    <Window.Resources>
-        <Converter:MenuTypeToSelectedBoolConverter x:Key="MenuTypeToSelectedBoolConverter"/>
-    </Window.Resources>
-    <Window.DataContext>
-        <Binding Path="MainScreen" Source="{StaticResource Locator}"/>
-    </Window.DataContext>
+        WindowState="{Binding MainWindowState, Mode=TwoWay}" Background="{DynamicResource Background1}" DataContext="{Binding MainScreen, Source={StaticResource Locator}}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180" />
@@ -28,28 +22,17 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <!--#region Content -->
-        <TabControl Grid.Row="1" Grid.Column="1" BorderThickness="0" Background="{DynamicResource Background2}" >
-            <TabItem IsSelected="{Binding   Path=SelectedMenuType, 
-                                            Converter={StaticResource MenuTypeToSelectedBoolConverter}, 
-                                            ConverterParameter={x:Static tabItemType:TAB_ITEM.STUDENTS},
-                                            Mode=OneWay}" 
-                     Visibility="Collapsed" Background="Transparent">
-                <Frame x:Name="StudentFrame" Source="StudentScreenView.xaml" Background="Transparent" />
-            </TabItem>
-            <TabItem IsSelected="{Binding   Path=SelectedMenuType, 
-                                            Converter={StaticResource MenuTypeToSelectedBoolConverter}, 
-                                            ConverterParameter={x:Static tabItemType:TAB_ITEM.MENU},
-                                            Mode=OneWay}" 
-                     Visibility="Collapsed" Background="Transparent">
-                <Frame x:Name="MenuFrame" Source="FoodMenuView.xaml" Background="Transparent" />
-            </TabItem>
-        </TabControl>
         <!--#endregion-->
+
+        <!--#endregion-->
+
+        <!--#endregion-->
+
+        <!--#region Content -->
+        <Frame x:Name="MainFrame" Grid.Row="1" Grid.Column="1" BorderThickness="0" Background="{DynamicResource Background2}" NavigationUIVisibility="Hidden" Source="/Neslihan_Kres_Makbuz;component/View/StudentScreenView.xaml"  />
 
         <!--#region LEFT MENU -->
         <usercontrols:NavigationBarView Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" MouseDown="Window_MouseDown" />
-        <!--#endregion-->
 
         <!--#region TOP MENU -->
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource Background1}" MouseDown="Window_MouseDown">
@@ -64,7 +47,6 @@
             <Button Grid.Column="2" Content="□" Style="{DynamicResource WindowsButton}" Command="{Binding MaximizeApplicationCommand}" Margin="0 -5 0 0" />
             <Button Grid.Column="1" Content="-" Style="{DynamicResource WindowsButton}" Command="{Binding MinimizeApplicationCommand}" />
         </Grid>
-        <!--#endregion-->
 
     </Grid>
 </Window>
