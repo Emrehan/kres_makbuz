@@ -22,7 +22,6 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         public TabButtonViewModel(IFrameNavigationService navigationService)
         {
             TabType = (NavigationPage)(_menuId++);
-            Console.WriteLine(TabType.ToString());
             if (TabType == NavigationPage.STUDENT_LIST)
                 IsSelected = true;
 

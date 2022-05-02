@@ -25,7 +25,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             #endregion
         }
 
-        WindowState _mainWindowState;
+        WindowState _mainWindowState = WindowState.Maximized;
         public WindowState MainWindowState
         {
             get
