@@ -63,7 +63,7 @@ namespace Neslihan_Kres_Makbuz.Model
 
         public override string ToString()
         {
-            return Name + " " + _tc;
+            return Name + " " + TC;
         }
 
         #region PROPERTIES
