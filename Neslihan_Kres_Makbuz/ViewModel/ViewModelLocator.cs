@@ -35,6 +35,11 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
+            SetupNavigation();
+
+            SimpleIoc.Default.Register<IDatabaseService, DatabaseService>();
+            SimpleIoc.Default.Register<IStudentService, StudentService>();
+
             SimpleIoc.Default.Register<MainScreenViewModel>();
             SimpleIoc.Default.Register<StudentScreenViewModel>(true);
             SimpleIoc.Default.Register<StudentDetailsViewModel>(true);
@@ -42,8 +47,6 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             SimpleIoc.Default.Register<TabButtonViewModel>();
             SimpleIoc.Default.Register<NavigationBarViewModel>();
             SimpleIoc.Default.Register<FoodMenuViewModel>();
-
-            SetupNavigation();
         }
 
         private static void SetupNavigation()
