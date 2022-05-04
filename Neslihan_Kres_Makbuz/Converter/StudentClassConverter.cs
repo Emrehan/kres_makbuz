@@ -30,7 +30,18 @@ namespace Neslihan_Kres_Makbuz.Converter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value == null) return CLASSES.ZERO_TWO;
+
+            string status = (string)value;
+
+            switch (status)
+            {
+                case "0-2": return CLASSES.ZERO_TWO;
+                case "3": return CLASSES.THREE;
+                case "4": return CLASSES.FOUR;
+                case "5+": return CLASSES.FIVE_MORE;
+                default: return CLASSES.ZERO_TWO;
+            }
         }
     }
 }

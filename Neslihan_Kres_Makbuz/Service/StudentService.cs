@@ -1,4 +1,5 @@
-﻿using Neslihan_Kres_Makbuz.Model;
+﻿using Neslihan_Kres_Makbuz.Helper;
+using Neslihan_Kres_Makbuz.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,7 +27,10 @@ namespace Neslihan_Kres_Makbuz.Service
 
         private void Student_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            //Update DB
+            if (e.PropertyName.EqualsAny("Selected", "ID", "CutedKDV", "Fee_wo_kdv"))
+                return;
+
+            _databaseService.UpdateStudents(StudentList);
         }
 
         private ObservableCollection<Student> _studentList; 
@@ -54,7 +58,14 @@ namespace Neslihan_Kres_Makbuz.Service
 
         public void UpdateStudent(Student student)
         {
-            throw new NotImplementedException();
+            for(var i = 0; i < StudentList.Count; i++)
+            {
+                if (StudentList[i].ID == student.ID)
+                {
+                    StudentList[i] = new Student(student);
+                    break;
+                }
+            }
         }
     }
 }

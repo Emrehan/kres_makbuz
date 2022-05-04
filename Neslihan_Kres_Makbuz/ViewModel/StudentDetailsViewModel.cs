@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using Neslihan_Kres_Makbuz.Converter;
 using Neslihan_Kres_Makbuz.Message;
+using CommonServiceLocator;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
 {
@@ -18,6 +19,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         public StudentDetailsViewModel()
         {
             CloseStudentDetailCommand = new RelayCommand(CloseStudentDetailMethod);
+            EditStudentDetailCommand = new RelayCommand(EditStudentDetailMethod);
 
             Messenger.Default.Register<SelectedStudentChangedMessage>(this, (SelectedStudentChangedMessage newStudent) => 
             {
@@ -30,6 +32,12 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         private void CloseStudentDetailMethod()
         {
             Messenger.Default.Send(new SelectedStudentChangedMessage(null));
+        }
+
+        public ICommand EditStudentDetailCommand { get; private set; }
+        private void EditStudentDetailMethod()
+        {
+            ServiceLocator.Current.GetInstance<StudentEditViewModel>().ScreenVisibility = System.Windows.Visibility.Visible;
         }
         #endregion
 

@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,10 @@ namespace Neslihan_Kres_Makbuz.Model
         private string waybillNo;
         private Student _student;
         private double kdv;
+
+        public Receipt()
+        {
+        }
 
         #region PROPERTIES
         public static Faker<Receipt> FakeData { get; } =
@@ -68,6 +73,17 @@ namespace Neslihan_Kres_Makbuz.Model
                 Set<Student>(() => this.Student, ref _student, value);
             }
         }
+
+        internal static ObservableCollection<Receipt> Clone(ObservableCollection<Receipt> receipts)
+        {
+            var newList = new ObservableCollection<Receipt>();
+            foreach (var r in receipts)
+            {
+                newList.Add(r);
+            }
+            return newList;
+        }
+
         public double KDV
         {
             get => kdv;

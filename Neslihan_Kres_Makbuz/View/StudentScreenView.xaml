@@ -193,6 +193,7 @@
         <!-- STUDENT DETAILS -->
         <Grid Grid.Column="1" Visibility="{Binding SelectedStudent, Converter={StaticResource CheckNullToVisibilityConverter}}">
             <local:StudentDetailsView />
+            <local:StudentEditView />
         </Grid>
         <!-- /STUDENT DETAILS -->
     </Grid>

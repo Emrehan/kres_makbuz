@@ -1,50 +1,109 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
-using Neslihan_Kres_Makbuz.Message;
+using Neslihan_Kres_Makbuz.Config;
 using Neslihan_Kres_Makbuz.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System;
+using System.Linq;
+using Neslihan_Kres_Makbuz.Converter;
+using Neslihan_Kres_Makbuz.Message;
+using System.Windows;
+using Neslihan_Kres_Makbuz.Service;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
 {
     public class StudentEditViewModel : ViewModelBase
     {
-        public StudentEditViewModel()
+        private Student baseStudent;
+        private readonly IStudentService _studentService;
+        public StudentEditViewModel(IStudentService studentService)
         {
-            CloseStudentDetailCommand = new RelayCommand(CloseStudentDetailMethod);
+            _studentService = studentService;
 
-            Messenger.Default.Register<SelectedStudentChangedMessage>(this, (SelectedStudentChangedMessage newStudent) =>
-            {
-                Student = newStudent.SelectedStudent;
-            });
+            CancelCommand = new RelayCommand(CancelMethod);
+            SaveCommand = new RelayCommand(SaveMethod);
+            ChangeClassCommand = new RelayCommand(ChangeClassMethod);
+            ChangeStatusCommand = new RelayCommand(ChangeStatusMethod);
+
+            Messenger.Default.Register<SelectedStudentChangedMessage>(this, SelectedStudentChangedMethod);
+        }
+
+        private void SelectedStudentChangedMethod(SelectedStudentChangedMessage newStudent)
+        {
+            baseStudent = newStudent.SelectedStudent;
+            ScreenVisibility = Visibility.Collapsed;
         }
 
         #region CloseStudentDetailCommand
-        public ICommand CloseStudentDetailCommand { get; private set; }
-        private void CloseStudentDetailMethod()
+        public ICommand CancelCommand { get; private set; }
+        private void CancelMethod()
         {
-            Messenger.Default.Send(new SelectedStudentChangedMessage(null));
+            ScreenVisibility = Visibility.Collapsed;
+        }
+
+        public ICommand SaveCommand { get; private set; }
+        private void SaveMethod()
+        {
+            baseStudent = EditedStudent.Clone();
+            _studentService.UpdateStudent(baseStudent);
+            ScreenVisibility = Visibility.Collapsed;
+        }
+
+        public ICommand ChangeStatusCommand { get; private set; }
+        private void ChangeStatusMethod()
+        {
+            var index = (int)EditedStudent.Status + 1;
+
+            if (index >= (int)STATUS.STATUS_COUNT)
+                index = 0;
+
+            EditedStudent.Status = (STATUS)index;
+        }
+
+        public ICommand ChangeClassCommand { get; private set; }
+        private void ChangeClassMethod()
+        {
+            var index = (int)EditedStudent.SClass + 1;
+
+            if (index >= (int)CLASSES.CLASS_COUNT)
+                index = 0;
+
+            EditedStudent.SClass = (CLASSES)index;
         }
         #endregion
 
         #region Properties
-        private Student _student;
-        public Student Student
+        private Student _editedStudent;
+        public Student EditedStudent
         {
             get
             {
-                return _student;
+                return _editedStudent;
             }
             set
             {
-                Set<Student>(() => this.Student, ref _student, value);
+                Set<Student>(() => this.EditedStudent, ref _editedStudent, value);
+            }
+        }
+
+        private Visibility _screenVisibility = Visibility.Collapsed ;
+        public Visibility ScreenVisibility
+        {
+            get
+            {
+                return _screenVisibility;
+            }
+            set
+            {
+                Set<Visibility>(() => this.ScreenVisibility, ref _screenVisibility, value);
+
+                if (value == Visibility.Visible)
+                    EditedStudent = baseStudent.Clone();
             }
         }
         #endregion
+
     }
 }

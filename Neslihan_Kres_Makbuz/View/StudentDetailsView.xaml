@@ -172,7 +172,7 @@
         <Grid Grid.Row="10" Grid.ColumnSpan="20">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                 <Button Grid.Column="0" Width="240" Content="Kapat" Command="{Binding CloseStudentDetailCommand}" />
-                <Button Grid.Column="1" Width="240" Content="Düzenle" />
+                <Button Grid.Column="1" Width="240" Content="Düzenle" Command="{Binding EditStudentDetailCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

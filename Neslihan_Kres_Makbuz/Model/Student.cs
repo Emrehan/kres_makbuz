@@ -17,7 +17,9 @@ namespace Neslihan_Kres_Makbuz.Model
         ZERO_TWO,
         THREE,
         FOUR,
-        FIVE_MORE
+        FIVE_MORE,
+
+        CLASS_COUNT
     }
 
     public enum SEX
@@ -30,7 +32,9 @@ namespace Neslihan_Kres_Makbuz.Model
     {
         LEFT,
         MEMBER,
-        GRADUATED
+        GRADUATED,
+
+        STATUS_COUNT
     }
 
     public class Student : ObservableObject
@@ -57,8 +61,23 @@ namespace Neslihan_Kres_Makbuz.Model
         public Student()
         {
             receipts = new ObservableCollection<Receipt>();
-
             Messenger.Default.Register<KDVChangedMessage>(this, (KDVChangedMessage) => CalculateFee() );
+        }
+
+        public Student(Student student)
+        {
+            Name = student.Name;
+            Selected = student.Selected;
+            Fee = student.Fee;
+            Address = student.Address;
+            ProgramDesc = student.ProgramDesc;
+            TC = student.TC;
+            Status = student.Status;
+            Sex = student.Sex;
+            SClass = student.SClass;
+            Receipts = Receipt.Clone(student.Receipts);
+
+            Messenger.Default.Register<KDVChangedMessage>(this, (KDVChangedMessage) => CalculateFee());
         }
 
         public override string ToString()
@@ -207,6 +226,23 @@ namespace Neslihan_Kres_Makbuz.Model
         {
             Fee_wo_kdv = Math.Round(((Fee * 100) / (100 + Globals.Instance.KDV)), 2);
             CutedKDV = Math.Round(Fee - this.Fee_wo_kdv, 2);
+        }
+
+        public Student Clone()
+        {
+            return new Student
+            {
+                Name = this.Name,
+                Selected = this.Selected,
+                Fee = this.Fee,
+                Address = this.Address,
+                ProgramDesc = this.ProgramDesc,
+                TC = this.TC,
+                Status = this.Status,
+                Sex = this.Sex,
+                SClass = this.SClass,
+                Receipts = this.Receipts
+            };
         }
         #endregion
     }
