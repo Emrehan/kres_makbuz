@@ -11,6 +11,7 @@
              >
     <UserControl.Resources>
         <ResourceDictionary>
+            <Converter:StudentsIsAllSelectedConverter x:Key="StudentsIsAllSelectedConverter"/>
             <Converter:StudentClassConverter x:Key="StudentClassConverter"/>
             <Converter:CheckNullToVisibilityConverter x:Key="CheckNullToVisibilityConverter"/>
         </ResourceDictionary>
@@ -34,10 +35,18 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                <TextBox Width="130" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=False}" />
+                <CheckBox Content="Bu ay ödeme yapanları gizle" Foreground="White" IsChecked="{Binding HidePayers, Mode=TwoWay}" />
+                <CheckBox Content="Aktif olmayan öğrencileri gizle" Foreground="White" IsChecked="{Binding HideDeactiveStudents, Mode=TwoWay}" />
+                <CheckBox Content="" IsChecked="{Binding SelectAll, Mode=TwoWay}" />
+                <TextBlock Foreground="White" Text="{Binding Items.Count, ElementName=StudentsDataGrid, Mode=OneWay}" />
+            </StackPanel>
+            
             <DataGrid 
                     Grid.Row="1" Grid.Column="0"
                     x:Name="StudentsDataGrid"                    
-                    ItemsSource="{Binding Students}"
+                    ItemsSource="{Binding StudentView}"
                     SelectedItem="{Binding SelectedStudent, Mode=TwoWay}"
                     SelectionMode="Single"
                     AutoGenerateColumns="False"
@@ -56,7 +65,7 @@
                     GridLinesVisibility="None"
                     BorderThickness="0"
                     Margin="20"
-                    IsSynchronizedWithCurrentItem="True"
+                    IsSynchronizedWithCurrentItem="False"
                     >
                 <DataGrid.InputBindings>
                     <MouseBinding

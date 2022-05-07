@@ -122,7 +122,7 @@
                   HorizontalContentAlignment="Center" 
                   ColumnWidth="Auto"
                   GridLinesVisibility="None"
-                  
+                  Height="300"
                 >
                 <DataGrid.Resources>
                     <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />

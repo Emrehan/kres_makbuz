@@ -7,9 +7,11 @@ using Neslihan_Kres_Makbuz.Service;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
@@ -20,12 +22,49 @@ namespace Neslihan_Kres_Makbuz.ViewModel
 
         public StudentScreenViewModel(IStudentService studentService)
         {
+            #region Services
+
+            #region Student Service
             _studentService = studentService;
-            Students = _studentService.StudentList;
+            Students = _studentService.StudentList;  
+            #endregion
+            
+            #endregion
 
-            Messenger.Default.Register<SelectedStudentChangedMessage>(this, SelectedStudentChangedMessageMethod);
 
-            DoubleClickCommand = new RelayCommand<object>(DoubleClickCommandMethod);
+            #region Messenger
+            Messenger.Default.Register<SelectedStudentChangedMessage>(this, SelectedStudentChangedMessageMethod); 
+            #endregion
+
+            #region Commands
+            DoubleClickCommand = new RelayCommand<object>(DoubleClickCommandMethod); 
+            #endregion
+
+
+            #region Filter
+            ItemSourceList = new CollectionViewSource() { Source = Students };
+            StudentView = ItemSourceList.View;
+            StudentView.Filter = new Predicate<object>(StudentsFiltering); 
+            #endregion
+        }
+
+        private bool StudentsFiltering(object obj)
+        {
+            Student s = (Student)obj;
+
+            bool showStudent = true;
+
+            if (!s.Name.Contains(SearchText))
+                showStudent = false;
+
+            if (HideDeactiveStudents && s.Status != STATUS.MEMBER)
+                showStudent = false;
+
+            if (HidePayers)
+                if (s.Receipts.Count(f => f.CreateDate.Month == DateTime.Now.Month) > 0)
+                    showStudent = false;
+
+            return showStudent;
         }
 
         private void SelectedStudentChangedMessageMethod(SelectedStudentChangedMessage newStudent)
@@ -36,22 +75,23 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             }
         }
 
+        public ICommand DoubleClickCommand { get; private set; }
         private void DoubleClickCommandMethod(object obj)
         {
             SelectedStudent.Selected = !SelectedStudent.Selected;
         }
 
+
+
+
         private ObservableCollection<Student> _students;
-        private Student _selectedStudent;
-
-        public ICommand DoubleClickCommand { get; private set; }
-
         public ObservableCollection<Student> Students
         {
             get => _students;
             set { Set<ObservableCollection<Student>>(() => this.Students, ref _students, value); }
         }
 
+        private Student _selectedStudent = null;
         public Student SelectedStudent
         {
             get => _selectedStudent;
@@ -64,5 +104,76 @@ namespace Neslihan_Kres_Makbuz.ViewModel
                 Set<Student>(() => this.SelectedStudent, ref _selectedStudent, value);
             }
         }
+
+        #region Filters
+
+        private CollectionViewSource _itemSourceList;
+        public CollectionViewSource ItemSourceList
+        {
+            get => _itemSourceList;
+            set
+            {
+                Set<CollectionViewSource>(() => this.ItemSourceList, ref _itemSourceList, value);
+            }
+        }
+
+        private ICollectionView _studentView;
+        public ICollectionView StudentView
+        {
+            get => _studentView;
+            set
+            {
+                Set<ICollectionView>(() => this.StudentView, ref _studentView, value);
+            }
+        }
+
+        private bool _hideDeactiveStudents = true;
+        public bool HideDeactiveStudents
+        {
+            get => _hideDeactiveStudents;
+            set
+            {
+                Set<bool>(() => this.HideDeactiveStudents, ref _hideDeactiveStudents, value);
+                ItemSourceList.View.Refresh();
+            }
+        }
+
+        private bool _hidePayers;
+        public bool HidePayers
+        {
+            get => _hidePayers;
+            set
+            {
+                Set<bool>(() => this.HidePayers, ref _hidePayers, value);
+                ItemSourceList.View.Refresh();
+            }
+        }
+
+        private bool _selectAll;
+        public bool SelectAll
+        {
+            get => _selectAll;
+            set
+            {
+                Set<bool>(() => this.SelectAll, ref _selectAll, value);
+
+                foreach (Student s in ItemSourceList.View)
+                {
+                    s.Selected = value;
+                }
+            }
+        }
+
+        private string _searchText = "";
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                Set<string>(() => this.SearchText, ref _searchText, value);
+                ItemSourceList.View.Refresh();
+            }
+        } 
+        #endregion
     }
 }

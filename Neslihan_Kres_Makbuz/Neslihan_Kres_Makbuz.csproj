@@ -144,6 +144,7 @@
     <Compile Include="Config\Globals.cs" />
     <Compile Include="Converter\CheckNullToVisibilityConverter.cs" />
     <Compile Include="Converter\ChosenStudentConverter.cs" />
+    <Compile Include="Converter\StudentsIsAllSelectedConverter.cs" />
     <Compile Include="Converter\TabTypeToStringConverter.cs" />
     <Compile Include="Converter\StudentClassConverter.cs" />
     <Compile Include="Converter\IntToVisibilityConverter.cs" />

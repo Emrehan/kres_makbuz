@@ -18,7 +18,7 @@ namespace Neslihan_Kres_Makbuz.Service
         public ObservableCollection<Student> GetStudents()
         {
             var StudentList = new ObservableCollection<Student>(Student.FakeData.Generate(50).ToArray());
-            var Receipts = new ObservableCollection<Receipt>(Receipt.FakeData.Generate(120).ToArray());
+            var Receipts = new ObservableCollection<Receipt>(Receipt.FakeData.Generate(1000).ToArray());
 
             Random rn = new Random();
             foreach (var r in Receipts)
