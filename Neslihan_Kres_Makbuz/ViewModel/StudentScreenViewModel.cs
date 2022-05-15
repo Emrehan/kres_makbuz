@@ -13,6 +13,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
+using Neslihan_Kres_Makbuz.Helper;
+using Neslihan_Kres_Makbuz.Converter;
 
 namespace Neslihan_Kres_Makbuz.ViewModel
 {
@@ -54,7 +56,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
 
             bool showStudent = true;
 
-            if (!s.Name.Contains(SearchText))
+            if (!s.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
                 showStudent = false;
 
             if (HideDeactiveStudents && s.Status != STATUS.MEMBER)
@@ -63,6 +65,16 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             if (HidePayers)
                 if (s.Receipts.Count(f => f.CreateDate.Month == DateTime.Now.Month) > 0)
                     showStudent = false;
+
+            if (!FilterFiveMoreSelected && s.SClass == CLASSES.FIVE_MORE)
+                showStudent = false;
+            if (!FilterFourSelected && s.SClass == CLASSES.FOUR)
+                showStudent = false;
+            if (!FilterThreeTwoSelected && s.SClass == CLASSES.THREE)
+                showStudent = false;
+            if (!FilterZeroTwoSelected && s.SClass == CLASSES.ZERO_TWO)
+                showStudent = false;
+
 
             return showStudent;
         }
@@ -174,6 +186,50 @@ namespace Neslihan_Kres_Makbuz.ViewModel
                 ItemSourceList.View.Refresh();
             }
         } 
+
+        private bool _filterFiveMoreSelected = true;
+        public bool FilterFiveMoreSelected
+        {
+            get => _filterFiveMoreSelected;
+            set
+            {
+                Set<bool>(() => this.FilterFiveMoreSelected, ref _filterFiveMoreSelected, value);
+                ItemSourceList.View.Refresh();
+            }
+        }
+
+        private bool _filterFourSelected = true;
+        public bool FilterFourSelected
+        {
+            get => _filterFourSelected;
+            set
+            {
+                Set<bool>(() => this.FilterFourSelected, ref _filterFourSelected, value);
+                ItemSourceList.View.Refresh();
+            }
+        }
+
+        private bool _filterThreeTwoSelected = true;
+        public bool FilterThreeTwoSelected
+        {
+            get => _filterThreeTwoSelected;
+            set
+            {
+                Set<bool>(() => this.FilterThreeTwoSelected, ref _filterThreeTwoSelected, value);
+                ItemSourceList.View.Refresh();
+            }
+        }
+
+        private bool _filterZeroTwoSelected = true;
+        public bool FilterZeroTwoSelected
+        {
+            get => _filterZeroTwoSelected;
+            set
+            {
+                Set<bool>(() => this.FilterZeroTwoSelected, ref _filterZeroTwoSelected, value);
+                ItemSourceList.View.Refresh();
+            }
+        }
         #endregion
     }
 }

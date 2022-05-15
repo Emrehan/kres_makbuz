@@ -94,8 +94,8 @@
         <Image Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="5" Source="/Neslihan_Kres_Makbuz;component/Resources/kid_photo.jpg"  />
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="6" >
-            <TextBox Text="{Binding EditedStudent.Name}" Style="{DynamicResource HeaderName}"  />
-            <Button Command="{Binding ChangeStatusCommand}" Content="{Binding EditedStudent.Status, Converter={StaticResource StudentStatusConverter}}" VerticalAlignment="Center" Foreground="{StaticResource OnPrimary2}" />
+            <TextBox Text="{Binding EditedStudent.Name, Mode=TwoWay}" Style="{DynamicResource HeaderName}"  />
+            <Button Command="{Binding ChangeStatusCommand}" Content="{Binding EditedStudent.Status, Mode=TwoWay, Converter={StaticResource StudentStatusConverter}}" VerticalAlignment="Center" Foreground="{StaticResource OnPrimary2}" />
         </StackPanel>
 
         <TextBlock Grid.Row="2" Grid.Column="4" Text="TC No" Style="{DynamicResource HeaderTextBlock}"  />

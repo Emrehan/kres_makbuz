@@ -67,15 +67,9 @@ namespace Neslihan_Kres_Makbuz.Resources.SVG
         {
             var moveX = rn.Next(-MAX_MOVE, MAX_MOVE + 1);
             var moveY = rn.Next(-MAX_MOVE, MAX_MOVE + 1);
-            
-            while (BoyOffset.Left + moveX >= MAX_RANGE || BoyOffset.Left + moveX <= -MAX_RANGE)
-            {
-                moveX = rn.Next(-MAX_MOVE, MAX_MOVE + 1);                
-            }
-            while(BoyOffset.Top + moveY >= MAX_RANGE || BoyOffset.Top + moveY <= -MAX_RANGE)
-            {
-                moveY = rn.Next(-MAX_MOVE, MAX_MOVE + 1);
-            }
+
+            moveX = rn.Next(-MAX_MOVE, MAX_MOVE + 1);
+            moveY = rn.Next(-MAX_MOVE, MAX_MOVE + 1);
 
             GirlOffset = new Thickness(BoyOffset.Left + moveX, BoyOffset.Top + moveY, 0, 0);
             BoyOffset = new Thickness(BoyOffset.Left - moveX, BoyOffset.Top - moveY, 0, 0);

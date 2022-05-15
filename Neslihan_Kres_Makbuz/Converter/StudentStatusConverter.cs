@@ -29,7 +29,13 @@ namespace Neslihan_Kres_Makbuz.Converter
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            switch ((string)value)
+            {
+                case "Ayrıldı": return STATUS.LEFT;
+                case "Devam": return STATUS.MEMBER;
+                case "Mezun": return STATUS.GRADUATED;
+                default: return STATUS.STATUS_COUNT;
+            }
         }
     }
 }
