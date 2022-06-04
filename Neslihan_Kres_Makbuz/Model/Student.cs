@@ -66,6 +66,7 @@ namespace Neslihan_Kres_Makbuz.Model
 
         public Student(Student student)
         {
+            ID = student.ID;
             Name = student.Name;
             Selected = student.Selected;
             Fee = student.Fee;
@@ -232,6 +233,7 @@ namespace Neslihan_Kres_Makbuz.Model
         {
             return new Student
             {
+                ID = this.ID,
                 Name = this.Name,
                 Selected = this.Selected,
                 Fee = this.Fee,
@@ -241,7 +243,7 @@ namespace Neslihan_Kres_Makbuz.Model
                 Status = this.Status,
                 Sex = this.Sex,
                 SClass = this.SClass,
-                Receipts = this.Receipts
+                Receipts = Receipt.Clone(this.Receipts)
             };
         }
         #endregion

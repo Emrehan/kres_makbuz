@@ -33,6 +33,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         private void SelectedStudentChangedMethod(SelectedStudentChangedMessage newStudent)
         {
             baseStudent = newStudent.SelectedStudent;
+            EditedStudent = newStudent.SelectedStudent.Clone();
             ScreenVisibility = Visibility.Collapsed;
         }
 
@@ -46,8 +47,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
         public ICommand SaveCommand { get; private set; }
         private void SaveMethod()
         {
-            baseStudent = EditedStudent.Clone();
-            _studentService.UpdateStudent(baseStudent);
+            _studentService.UpdateStudent(EditedStudent);
             ScreenVisibility = Visibility.Collapsed;
         }
 
@@ -99,8 +99,7 @@ namespace Neslihan_Kres_Makbuz.ViewModel
             {
                 Set<Visibility>(() => this.ScreenVisibility, ref _screenVisibility, value);
 
-                if (value == Visibility.Visible)
-                    EditedStudent = baseStudent.Clone();
+                EditedStudent = baseStudent.Clone();
             }
         }
         #endregion

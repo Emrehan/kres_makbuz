@@ -13,6 +13,7 @@ namespace Neslihan_Kres_Makbuz.Service
         void UpdateStudent(Student student);
         void UpdateStudents(ObservableCollection<Student> students);
         ObservableCollection<Student> GetStudents();
-        ObservableCollection<Student> GetFilteredStudents(string filter);        
+        ObservableCollection<Student> GetFilteredStudents(string filter);
+        Student FindStudent(int id);
     }
 }
